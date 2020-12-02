@@ -18,22 +18,21 @@ con = psycopg2.connect(
     host="localhost",
     database="postgres",
     user="postgres",
-    password="762341Aa")
+    password="XXX")
 
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 
-DB_URL = 'postgresql://postgres:762341Aa@localhost:5432/postgres'
+DB_URL = 'postgresql://postgres:XXX@localhost:5432/postgres'
 UPLOAD_FOLDER = r'/home/armianin/FIfe/Fin/static'
 ALLOWED_EXTENSIONS = {'jpeg', 'jpg', 'png'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['GOOGLEMAPS_KEY'] = "8JZ7i18MjFuM35dJHq70n3Hx4"
 app.config['RECAPTCHA_USE_SSL']= False
-app.config['RECAPTCHA_PUBLIC_KEY'] = '6LeBCfIZAAAAAO39_L4Gd7f6uCM0PfP_N3XjHxkW'
-app.config['RECAPTCHA_PRIVATE_KEY'] = '6LeBCfIZAAAAAJTjq0Xz_ndAW9LByCo1nJJKy-up'
+app.config['RECAPTCHA_PUBLIC_KEY'] = 'XXX'
+app.config['RECAPTCHA_PRIVATE_KEY'] = 'XXX-up'
 app.config['RECAPTCHA_OPTIONS'] = {'theme':'black'}
 login_manager = LoginManager()
 login_manager.init_app(app)
