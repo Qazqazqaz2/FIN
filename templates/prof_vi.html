@@ -1,0 +1,67 @@
+{% extends "profile.html" %}
+{% block prof %}
+<h1 class="title">
+  {{ ma.name }}!!! {{ ma.main_num }}!!! {{ ma.email }}!!!
+</h1>
+{% if ma.id == pr.id%}
+
+    <input type=submit value=edit>
+  {% endif %}
+  {% if ma.id != pr.id%}
+  <div class="cont" tabindex="-1">
+    <div style="text-align: center;">
+      <a href="#openMod">Открыть модальное окно</a>
+    </div>
+    <div id="openMod" class="mod">
+      <div class="mod-dialog">
+        <div class="mod-content">
+          <div class="mod-header">
+            <h3 class="mod-title">ggggg</h3>
+            <a href="#clos" title="Close" class="clos">×</a>
+          </div>
+          <div class="mod-body">
+            <form method="POST" enctype=multipart/form-data>
+            <div class="field">
+              <button type=submit class="btn btn-success">Написать</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<br>
+<div class="row">
+  {% for item in main %}
+      <div class="col-md-6 col-xl-3 mb-3 mb-md-4">
+          <div class="card h-100">
+              <div class="card-header d-flex">
+                  <h5 class="h6 font-weight-semi-bold">
+                      {{ item.title }}
+                  </h5>
+             </div>
+            <div class="col-md-6">
+               <div class="overlay">
+                  <iframe src="/static/{{ item.prew_img|urlencode }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen id="video"></iframe>
+               </div>
+              </div>
+            <div class="modal-footer">
+                <a href='/profile/{{ item.creator_id }}/'>
+                <h3> Перейти к автору</h3>
+                </a>
+                <a href="/view/{{ item.id }}">
+                <h3> Перейти к услуге</h3>
+                </a>
+            </div>
+              <div class="modal-footer">
+                <a href="/view/{{item.id}}/post/">
+                <h3> Отзывы </h3>
+                </a>
+            </div>
+          </div>
+      </div>
+  {% endfor %}
+</div>
+
+  {% endif %}
+{% endblock %}

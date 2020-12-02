@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Добавление товара</title>
+{% endblock %}
+{% block body %}
+<script type="text/javascript">
+      var verifyCallback = function(response) {
+        alert(response);
+      };
+      var onloadCallback = function() {
+        grecaptcha.render('html_element', {
+          'sitekey' : '6LeBCfIZAAAAAO39_L4Gd7f6uCM0PfP_N3XjHxkW',
+          'theme' : 'dark'
+        });
+      };
+    </script>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+</script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<div class="container" style="padding-top: 160px">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <h1>Добавление товара</h1>
+    <form method="post" enctype=multipart/form-data>
+        <input type="text" class="form-control" name="title" id="title" placeholder="Введите название"><br>
+        <br>
+        <input type="text" class="form-control" name="price" id="price" placeholder="Цена">
+        <br>
+        <textarea type="text" class="form-control" name="text" id="text" placeholder="Описание"></textarea>
+        <br>
+        <input type="text" class="form-control" name="ad_ul" id="ad_ul" placeholder="Улица">
+        <br>
+        <input type="text" class="form-control" name="index" id="index" placeholder="Почтовый индекс">
+        <br>
+        <input type="text" class="form-control" name="adr_hou" id="adr_hou" placeholder="Квартира или дом">
+        <br>
+        <input type="text" class="form-control" name="ad_ci" id="ad_ci" placeholder="Город">
+        <br>
+        <input type="text" class="form-control" name="ad_k" id="ad_k" placeholder="Край или облость">
+        <br>
+        <div class="container">
+<div id="actions" class="row">
+    <div class="col-lg-7">
+              <div class="d-flex justify-content-md-between">
+                  <h5> Загрузить картинку для превью
+                    <input type="file" name="prew_img" id="prew_img" multiple="">
+                  </h5>
+                  <h5> Загрузить все картинки услуги
+                  <input type="file" name="img" id="img" multiple="">
+                  </h5>
+              </div>
+    </div>
+</div>
+            <br>
+            <div id="html_element" name="captcha" class="captcha d-flex justify-content-center" inputmode=""></div>
+            <br>
+            <button type="submit" class="btn-lg btn-block btn-info">Info</button>
+
+    </form>
+</div>
+<script>
+    // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+var previewNode = document.querySelector("#template");
+previewNode.id = "";
+var previewTemplate = previewNode.parentNode.innerHTML;
+previewNode.parentNode.removeChild(previewNode);
+
+var myDropzone = new Dropzone(".container", { // Make the whole body a dropzone
+  url: "/upload", // Set the url
+  thumbnailWidth: 80,
+  thumbnailHeight: 80,
+  parallelUploads: 20,
+  previewTemplate: previewTemplate,
+  autoQueue: false, // Make sure the files aren't queued until manually added
+  previewsContainer: "#previews", // Define the container to display the previews
+  clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+});
+
+myDropzone.on("addedfile", function(file) {
+  // Hookup the start button
+  file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file); };
+});
+
+// Update the total progress bar
+myDropzone.on("totaluploadprogress", function(progress) {
+  document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
+});
+
+myDropzone.on("sending", function(file) {
+  // Show the total progress bar when upload starts
+  document.querySelector("#total-progress").style.opacity = "1";
+  // And disable the start button
+  file.previewElement.querySelector(".start").setAttribute("disabled", "disabled");
+});
+
+// Hide the total progress bar when nothing's uploading anymore
+myDropzone.on("queuecomplete", function(progress) {
+  document.querySelector("#total-progress").style.opacity = "0";
+});
+
+// Setup the buttons for all transfers
+// The "add files" button doesn't need to be setup because the config
+// `clickable` has already been specified.
+document.querySelector("#actions .start").onclick = function() {
+  myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+};
+document.querySelector("#actions .cancel").onclick = function() {
+  myDropzone.removeAllFiles(true);
+};
+</script>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "profile.html" %}
+ {% block prof %}
+<h1 class="title">
+  {{ ma.name }}!!! {{ ma.main_num }}!!! {{ ma.email }}!!!{{ ma.id }}!!!
+</h1>
+<div class="overlay">
+    <iframe src="{{ url_for('static', filename=ma.prew_img) }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen id="video"></iframe>
+</div>
+  <h1 class="title">
+    <a href="{{url_for('edit')}}">edit</a>
+  </h1>
+<br>
+<br>
+<div class="row">
+  {% for item in main %}
+      <div class="col-md-6 col-xl-3 mb-3 mb-md-4">
+          <div class="card h-100">
+              <div class="card-header d-flex">
+                  <h5 class="h6 font-weight-semi-bold">
+                      {{ item.title }}
+                  </h5>
+             </div>
+            <div class="col-md-6">
+               <div class="overlay">
+                  <iframe src="/static/{{ item.prew_img|urlencode }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen id="video"></iframe>
+               </div>
+              </div>
+            <div class="modal-footer">
+                <a href='/profile/{{ item.creator_id }}/'>
+                <h3> Перейти к автору</h3>
+                </a>
+                <a href="/view/{{ item.id }}">
+                <h3> Перейти к услуге</h3>
+                </a>
+            </div>
+              <div class="modal-footer">
+                <a href="/view/{{item.id}}/post/">
+                <h3> Отзывы </h3>
+                </a>
+            </div>
+          </div>
+      </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

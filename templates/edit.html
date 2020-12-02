@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Добавление товара</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <h1>Добавление товара</h1>
+
+    <form method="post" enctype=multipart/form-data>
+        <h1>{{main.name}}</h1>
+        <input type="text" class="form-control" name="name_ed" id="name_ed" placeholder="name_ed"><br>
+                <h1>{{main.main_num}}</h1>
+        <input type="text" class="form-control" name="main_num_ed" id="main_num_ed" placeholder="main_num_ed"><br>
+                <h1>{{main.email}}</h1>
+        <input type="text" class="form-control" name="email_ed" id="email_ed" placeholder="email_ed"><br>
+        <input type=submit value="EDIT">
+    </form>
+  <form method="post" enctype=multipart/form-data>
+      <p><input type="checkbox" name="delite" value="True">Я хочу удалить аккаунт</p>
+      <p><input type="submit" value="Delite"></p>
+  </form>
+    <!--
+<script>
+   var putMethod = ( event ) => {
+     // Prevent redirection of Form Click
+     event.preventDefault();
+     var target = event.target;
+     while ( target.tagName != "FORM" ) {
+       target = target.parentElement;
+     } // While the target is not te FORM tag, it looks for the parent element
+     // The action attribute provides the request URL
+     var url = target.getAttribute( "action" );
+
+     // Collect Form Data by prefix "put_" on name attribute
+     var bodyForm = target.querySelectorAll( "[name^=put_]");
+     var body = {};
+     bodyForm.forEach( element => {
+       // I used split to separate prefix from worth name attribute
+       var nameArray = element.getAttribute( "name" ).split( "_" );
+       var name = nameArray[ nameArray.length - 1 ];
+       if ( element.tagName != "TEXTAREA" ) {
+         var value = element.getAttribute( "value" );
+       } else {
+       // if element is textarea, value attribute may return null or undefined
+         var value = element.innerHTML;
+       }
+       // all elements with name="put_*" has value registered in body object
+       body[ name ] = value;
+     } );
+     var xhr = new XMLHttpRequest();
+     xhr.open( "PUT", url );
+     xhr.setRequestHeader( "Content-Type", "application/json" );
+     xhr.onload = () => {
+       if ( xhr.status === 200 ) {
+       // reload() uses cache, reload( true ) force no-cache. I reload the page to make "redirects normal effect" of HTML form when submit. You can manipulate DOM instead.
+         location.reload( true );
+       } else {
+         console.log( xhr.status, xhr.responseText );
+       }
+     }
+     xhr.send( body );
+   }
+
+   var deleteMethod = ( event ) => {
+     event.preventDefault();
+     var confirm = window.confirm( "Certeza em deletar este conteúdo?" );
+     if ( confirm ) {
+       var target = event.target;
+       while ( target.tagName != "FORM" ) {
+         target = target.parentElement;
+       }
+       var url = target.getAttribute( "action" );
+       var xhr = new XMLHttpRequest();
+       xhr.open( "DELETE", url );
+       xhr.setRequestHeader( "Content-Type", "application/json" );
+       xhr.onload = () => {
+         if ( xhr.status === 200 ) {
+           location.reload( true );
+           console.log( xhr.responseText );
+         } else {
+           console.log( xhr.status, xhr.responseText );
+         }
+       }
+       xhr.send();
+     }
+   }
+</script>
+<script>
+  document.querySelectorAll( "[name=update_data], [name=delete_data]" ).forEach( element => {
+    var button = element;
+    var form = element;
+    while ( form.tagName != "FORM" ) {
+      form = form.parentElement;
+    }
+    var method = form.getAttribute( "method" );
+    if ( method == "PUT" ) {
+      button.addEventListener( "click", putMethod );
+    }
+    if ( method == "DELETE" ) {
+      button.addEventListener( "click", deleteMethod );
+    }
+  } );
+</script>
+<script>
+  document.querySelectorAll( "[name=remove_data]" ).forEach( element => {
+    var button = element;
+    button.addEventListener( "click", deleteMethod );
+</script>
+-->
+{% endblock %}
