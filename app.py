@@ -12,6 +12,7 @@ import psycopg2.extensions
 from geopy.geocoders import Nominatim
 from random import randint
 import datetime, time
+from flask_redis import FlaskRedis
 
 
 con = psycopg2.connect(
@@ -23,16 +24,18 @@ con = psycopg2.connect(
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 
-DB_URL = 'postgresql://postgres:XXX@localhost:5432/postgres'
+
+DB_URL = 'postgresql://postgres:XXX@localhost:6432/postgres'
 UPLOAD_FOLDER = r'/home/armianin/FIfe/Fin/static'
 ALLOWED_EXTENSIONS = {'jpeg', 'jpg', 'png'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#app.config['GOOGLEMAPS_KEY'] = "8JZ7i18MjFuM35dJHq70n3Hx4"
 app.config['RECAPTCHA_USE_SSL']= False
-app.config['RECAPTCHA_PUBLIC_KEY'] = 'XXX'
-app.config['RECAPTCHA_PRIVATE_KEY'] = 'XXX-up'
+app.config['RECAPTCHA_PUBLIC_KEY'] = '6LeBCfIZAAAAAO39_L4Gd7f6uCM0PfP_N3XjHxkW'
+app.config['RECAPTCHA_PRIVATE_KEY'] = '6LeBCfIZAAAAAJTjq0Xz_ndAW9LByCo1nJJKy-up'
 app.config['RECAPTCHA_OPTIONS'] = {'theme':'black'}
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -40,7 +43,6 @@ login_manager.login_view = 'login'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 db_cursor = con.cursor()
-
 
 class Item(db.Model):
     __tablename__ = 'item'
@@ -103,8 +105,8 @@ class Chat(db.Model):
     name = db.Column(db.ARRAY(db.TEXT))
     id = db.Column(db.Integer, primary_key=True)
     mess = db.Column(db.ARRAY(db.TEXT))
-    us_1 = db.Column(db.Integer)
-    us_2 = db.Column(db.Integer)
+    us_1 = db.Column(db.Text)
+    us_2 = db.Column(db.Text)
     pub_date = db.Column(db.ARRAY(db.DateTime), default=datetime.datetime.utcnow())
 
     def __init__(self, name, pub_date, mess, us_1, us_2):
@@ -249,7 +251,7 @@ def result():
 def profile():
     list_item = db.session.query(Item).filter_by(creator_id=current_user.id).all()
     print(list_item)
-    return render_template('prof_ed.html', ma=current_user, main=list_item)
+    return render_template('prof_ed.html', ma=current_user, main=list_item, mat=len(list_item))
 
 @app.route('/edit/',  methods=['POST'])
 @login_required
@@ -319,10 +321,10 @@ def edit_vi():
 @login_required
 def chat(id):
     ch = Chat.query.get(id)
-    T_ch = ch.us_1==current_user.id
+    T_ch = ch.us_1==current_user.name
     print(T_ch)
     if T_ch==False:
-        T_ch = ch.us_2==current_user.id
+        T_ch = ch.us_2==current_user.name
         print(T_ch)
     if T_ch == False:
         return redirect('/list/mess/')
@@ -353,18 +355,18 @@ def profile_vi(id):
     if current_user.is_authenticated and id==current_user.id:
         return redirect(url_for('profile'))
     if request.method == "POST" and current_user.is_authenticated:
-        us_1 = current_user.id
-        us_2 = id
+        us_1 = current_user.name
+        us_2 = pr.name
         check_1 = db.session.query(Chat).filter((Chat.us_2==us_1) and (Chat.us_1==us_2)).first()
         check_2 = db.session.query(Chat).filter((Chat.us_2==us_2) and (Chat.us_1==us_1)).first()
         check = str(str(check_2) + str(check_1))
         print(check)
         if check=='NoneNone':
             print('None')
-            us_2 = id
+            us_2 = pr.name
             mess = ['Привет']
             print(mess)
-            com_cr = Chat(us_1=current_user.id, us_2=us_2, mess=mess, pub_date=[datetime.datetime.utcnow()], name=[current_user.name])
+            com_cr = Chat(us_1=current_user.name, us_2=us_2, mess=mess, pub_date=[datetime.datetime.utcnow()], name=[current_user.name])
             print('te')
             db.session.add(com_cr)
             print('1')
@@ -387,14 +389,14 @@ def profile_vi(id):
         return redirect('/login')
     else:
         list_item = db.session.query(Item).filter_by(creator_id=id).all()
-        return render_template('prof_vi.html', ma=current_user, pr=pr, main=list_item)
+        return render_template('prof_vi.html', ma=pr, main=list_item, mat=len(list_item))
 
 @app.route('/list/mess/')
 @login_required
 def list():
-    list = Chat.query.order_by(Chat.us_1==current_user.id or Chat.us_2==current_user.id).all()
+    list = Chat.query.order_by(Chat.us_1==current_user.name or Chat.us_2==current_user.name).all()
     for l in list:
-        print(l.id)
+        print(l)
     return render_template('list_mess.html', list=list)
 
 @login_manager.request_loader

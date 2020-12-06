@@ -18,7 +18,8 @@
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
 </script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<div class="container" style="padding-top: 160px">
+
+<div class="container" style="padding-top: 160px; padding-bottom: 40px">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <div class="notification is-danger">
@@ -26,43 +27,1255 @@
     </div>
     {% endif %}
     {% endwith %}
-    <h1>Добавление товара</h1>
-    <form method="post" enctype=multipart/form-data>
+    <form method="post" class="md-form" enctype=multipart/form-data>
         <input type="text" class="form-control" name="title" id="title" placeholder="Введите название"><br>
         <br>
         <input type="text" class="form-control" name="price" id="price" placeholder="Цена">
         <br>
         <textarea type="text" class="form-control" name="text" id="text" placeholder="Описание"></textarea>
         <br>
-        <input type="text" class="form-control" name="ad_ul" id="ad_ul" placeholder="Улица">
+        <div class="container border">
+        <input type="text" class="form-control" name="index" id="index" placeholder="Индекс">
         <br>
-        <input type="text" class="form-control" name="index" id="index" placeholder="Почтовый индекс">
+        <h4 class="text-center">Или</h4>
+        <input type="text" class="form-control" name="ad_ul" id="ad_ul" placeholder="Улица">
         <br>
         <input type="text" class="form-control" name="adr_hou" id="adr_hou" placeholder="Квартира или дом">
         <br>
-        <input type="text" class="form-control" name="ad_ci" id="ad_ci" placeholder="Город">
-        <br>
-        <input type="text" class="form-control" name="ad_k" id="ad_k" placeholder="Край или облость">
-        <br>
+          <div class="input-group-prepend">
+              <button type="button" class="form-control btn btn-outline-secondary dropdown-toggle" name="ad_ci" id="ad_ci"></button>
+          <div class="dropdown-menu">
+            <option class="dropdown-item" value="Абаза (Республика Хакасия)">Абаза (Республика Хакасия)</option>
+            <option class="dropdown-item" value="Малмыж (Кировская область)">Малмыж (Кировская область)</option>
+            <option class="dropdown-item" value="Абакан (Республика Хакасия)">Абакан (Республика Хакасия)</option>
+            <option class="dropdown-item" value="Малоархангельск (Орловская область)">Малоархангельск (Орловская область)</option>
+            <option class="dropdown-item" value="Абдулино (Оренбургская область)">Абдулино (Оренбургская область)</option>
+            <option class="dropdown-item" value="Малоярославец (Калужская область)">Малоярославец (Калужская область)</option>
+            <option class="dropdown-item" value="Абинск (Краснодарский край)">Абинск (Краснодарский край)</option>
+            <option class="dropdown-item" value="Мамадыш (Республика Татарстан)">Мамадыш (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Агидель (Республика Башкортостан)">Агидель (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Мамоново (Калининградская область)">Мамоново (Калининградская область)</option>
+            <option class="dropdown-item" value="Агрыз (Республика Татарстан)">Агрыз (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Мантурово (Костромская область)">Мантурово (Костромская область)</option>
+            <option class="dropdown-item" value="Адыгейск (Республика Адыгея)">Адыгейск (Республика Адыгея)</option>
+            <option class="dropdown-item" value="Мариинск (Кемеровская область)">Мариинск (Кемеровская область)</option>
+            <option class="dropdown-item" value="Азнакаево (Республика Татарстан)">Азнакаево (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Мариинский Посад (Чувашская Республика - Чувашия)">Мариинский Посад (Чувашская Республика - Чувашия)</option>
+            <option class="dropdown-item" value="Азов (Ростовская область)">Азов (Ростовская область)</option>
+            <option class="dropdown-item" value="Маркс (Саратовская область)">Маркс (Саратовская область)</option>
+            <option class="dropdown-item" value="Ак-Довурак (Республика Тыва)">Ак-Довурак (Республика Тыва)</option>
+            <option class="dropdown-item" value="Махачкала (Республика Дагестан)">Махачкала (Республика Дагестан)</option>
+            <option class="dropdown-item" value="Аксай (Ростовская область)">Аксай (Ростовская область)</option>
+            <option class="dropdown-item" value="Мглин (Брянская область)">Мглин (Брянская область)</option>
+            <option class="dropdown-item" value="Алагир (Республика Северная Осетия - Алания)">Алагир (Республика Северная Осетия - Алания)</option>
+            <option class="dropdown-item" value="Мегион (Ханты-Мансийский автономный округ - Югра)">Мегион (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Алапаевск (Свердловская область)">Алапаевск (Свердловская область)</option>
+            <option class="dropdown-item" value="Медвежьегорск (Республика Карелия)">Медвежьегорск (Республика Карелия)</option>
+            <option class="dropdown-item" value="Алатырь (Чувашская Республика - Чувашия)">Алатырь (Чувашская Республика - Чувашия)</option>
+            <option class="dropdown-item" value="Медногорск (Оренбургская область)">Медногорск (Оренбургская область)</option>
+            <option class="dropdown-item" value="Алдан (Республика Саха (Якутия))">Алдан (Республика Саха (Якутия))</option>
+            <option class="dropdown-item" value="Медынь (Калужская область)">Медынь (Калужская область)</option>
+            <option class="dropdown-item" value="Алейск (Алтайский край)">Алейск (Алтайский край)</option>
+            <option class="dropdown-item" value="Межгорье (Республика Башкортостан)">Межгорье (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Александров (Владимирская область)">Александров (Владимирская область)</option>
+            <option class="dropdown-item" value="Междуреченск (Кемеровская область)">Междуреченск (Кемеровская область)</option>
+            <option class="dropdown-item" value="Александровск (Пермский край)">Александровск (Пермский край)</option>
+            <option class="dropdown-item" value="Мезень (Архангельская область)">Мезень (Архангельская область)</option>
+            <option class="dropdown-item" value="Александровск-Сахалинский (Сахалинская область)">Александровск-Сахалинский (Сахалинская область)</option>
+            <option class="dropdown-item" value="Меленки (Владимирская область)">Меленки (Владимирская область)</option>
+            <option class="dropdown-item" value="Алексеевка (Белгородская область)">Алексеевка (Белгородская область)</option>
+            <option class="dropdown-item" value="Мелеуз (Республика Башкортостан)">Мелеуз (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Алексин (Тульская область)">Алексин (Тульская область)</option>
+            <option class="dropdown-item" value="Менделеевск (Республика Татарстан)">Менделеевск (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Алзамай (Иркутская область)">Алзамай (Иркутская область)</option>
+            <option class="dropdown-item" value="Мензелинск (Республика Татарстан)">Мензелинск (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Алупка (Республика Крым)">Алупка (Республика Крым)</option>
+            <option class="dropdown-item" value="Мещовск (Калужская область)">Мещовск (Калужская область)</option>
+            <option class="dropdown-item" value="Алушта (Республика Крым)">Алушта (Республика Крым)</option>
+            <option class="dropdown-item" value="Миасс (Челябинская область)">Миасс (Челябинская область)</option>
+            <option class="dropdown-item" value="Альметьевск (Республика Татарстан)">Альметьевск (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Микунь (Республика Коми)">Микунь (Республика Коми)</option>
+            <option class="dropdown-item" value="Амурск (Хабаровский край)">Амурск (Хабаровский край)</option>
+            <option class="dropdown-item" value="Миллерово (Ростовская область)">Миллерово (Ростовская область)</option>
+            <option class="dropdown-item" value="Анадырь (Чукотский автономный округ)">Анадырь (Чукотский автономный округ)</option>
+            <option class="dropdown-item" value="Минеральные Воды (Ставропольский край)">Минеральные Воды (Ставропольский край)</option>
+            <option class="dropdown-item" value="Анапа (Краснодарский край)">Анапа (Краснодарский край)</option>
+            <option class="dropdown-item" value="Минусинск (Красноярский край)">Минусинск (Красноярский край)</option>
+            <option class="dropdown-item" value="Ангарск (Иркутская область)">Ангарск (Иркутская область)</option>
+            <option class="dropdown-item" value="Миньяр (Челябинская область)">Миньяр (Челябинская область)</option>
+            <option class="dropdown-item" value="Андреаполь (Тверская область)">Андреаполь (Тверская область)</option>
+            <option class="dropdown-item" value="Мирный (Архангельская область)">Мирный (Архангельская область)</option>
+            <option class="dropdown-item" value="Анжеро-Судженск (Кемеровская область)">Анжеро-Судженск (Кемеровская область)</option>
+            <option class="dropdown-item" value="Мирный (Республика Саха (Якутия))">Мирный (Республика Саха (Якутия))</option>
+            <option class="dropdown-item" value="Анива (Сахалинская область)">Анива (Сахалинская область)</option>
+            <option class="dropdown-item" value="Михайлов (Рязанская область)">Михайлов (Рязанская область)</option>
+            <option class="dropdown-item" value="Апатиты (Мурманская область)">Апатиты (Мурманская область)</option>
+            <option class="dropdown-item" value="Михайловка (Волгоградская область)">Михайловка (Волгоградская область)</option>
+            <option class="dropdown-item" value="Апрелевка (Московская область)">Апрелевка (Московская область)</option>
+            <option class="dropdown-item" value="Михайловск (Свердловская область)">Михайловск (Свердловская область)</option>
+            <option class="dropdown-item" value="Апшеронск (Краснодарский край)">Апшеронск (Краснодарский край)</option>
+            <option class="dropdown-item" value="Михайловск (Ставропольский край)">Михайловск (Ставропольский край)</option>
+            <option class="dropdown-item" value="Арамиль (Свердловская область)">Арамиль (Свердловская область)</option>
+            <option class="dropdown-item" value="Мичуринск (Тамбовская область)">Мичуринск (Тамбовская область)</option>
+            <option class="dropdown-item" value="Аргун (Чеченская Республика)">Аргун (Чеченская Республика)</option>
+            <option class="dropdown-item" value="Могоча (Забайкальский край)">Могоча (Забайкальский край)</option>
+            <option class="dropdown-item" value="Ардатов (Республика Мордовия)">Ардатов (Республика Мордовия)</option>
+            <option class="dropdown-item" value="Можайск (Московская область)">Можайск (Московская область)</option>
+            <option class="dropdown-item" value="Ардон (Республика Северная Осетия - Алания)">Ардон (Республика Северная Осетия - Алания)</option>
+            <option class="dropdown-item" value="Можга (Удмуртская Республика)">Можга (Удмуртская Республика)</option>
+            <option class="dropdown-item" value="Арзамас (Нижегородская область)">Арзамас (Нижегородская область)</option>
+            <option class="dropdown-item" value="Моздок (Республика Северная Осетия - Алания)">Моздок (Республика Северная Осетия - Алания)</option>
+            <option class="dropdown-item" value="Аркадак (Саратовская область)">Аркадак (Саратовская область)</option>
+            <option class="dropdown-item" value="Мончегорск (Мурманская область)">Мончегорск (Мурманская область)</option>
+            <option class="dropdown-item" value="Армавир (Краснодарский край)">Армавир (Краснодарский край)</option>
+            <option class="dropdown-item" value="Морозовск (Ростовская область)">Морозовск (Ростовская область)</option>
+            <option class="dropdown-item" value="Армянск (Республика Крым)">Армянск (Республика Крым)</option>
+            <option class="dropdown-item" value="Моршанск (Тамбовская область)">Моршанск (Тамбовская область)</option>
+            <option class="dropdown-item" value="Арсеньев (Приморский край)">Арсеньев (Приморский край)</option>
+            <option class="dropdown-item" value="Мосальск (Калужская область)">Мосальск (Калужская область)</option>
+            <option class="dropdown-item" value="Арск (Республика Татарстан)">Арск (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Москва">Москва</option>
+            <option class="dropdown-item" value="Артём (Приморский край)">Артём (Приморский край)</option>
+            <option class="dropdown-item" value="Муравленко (Ямало-Ненецкий автономный округ)">Муравленко (Ямало-Ненецкий автономный округ)</option>
+            <option class="dropdown-item" value="Артёмовск (Красноярский край)">Артёмовск (Красноярский край)</option>
+            <option class="dropdown-item" value="Мураши (Кировская область)">Мураши (Кировская область)</option>
+            <option class="dropdown-item" value="Артёмовский (Свердловская область)">Артёмовский (Свердловская область)</option>
+            <option class="dropdown-item" value="Мурино (Ленинградская область)">Мурино (Ленинградская область)</option>
+            <option class="dropdown-item" value="Архангельск">Архангельск</option>
+            <option class="dropdown-item" value="Мурманск">Мурманск</option>
+            <option class="dropdown-item" value="Асбест (Свердловская область)">Асбест (Свердловская область)</option>
+            <option class="dropdown-item" value="Муром (Владимирская область)">Муром (Владимирская область)</option>
+            <option class="dropdown-item" value="Асино (Томская область)">Асино (Томская область)</option>
+            <option class="dropdown-item" value="Мценск (Орловская область)">Мценск (Орловская область)</option>
+            <option class="dropdown-item" value="Астрахань">Астрахань</option>
+            <option class="dropdown-item" value="Мыски (Кемеровская область)">Мыски (Кемеровская область)</option>
+            <option class="dropdown-item" value="Аткарск (Саратовская область)">Аткарск (Саратовская область)</option>
+            <option class="dropdown-item" value="Мытищи (Московская область)">Мытищи (Московская область)</option>
+            <option class="dropdown-item" value="Ахтубинск (Астраханская область)">Ахтубинск (Астраханская область)</option>
+            <option class="dropdown-item" value="Мышкин (Ярославская область)">Мышкин (Ярославская область)</option>
+            <option class="dropdown-item" value="Ачинск (Красноярский край)">Ачинск (Красноярский край)</option>
+            <option class="dropdown-item" value="Набережные Челны (Республика Татарстан)">Набережные Челны (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Аша (Челябинская область)">Аша (Челябинская область)</option>
+            <option class="dropdown-item" value="Навашино (Нижегородская область)">Навашино (Нижегородская область)</option>
+            <option class="dropdown-item" value="Бабаево (Вологодская область)">Бабаево (Вологодская область)</option>
+            <option class="dropdown-item" value="Наволоки (Ивановская область)">Наволоки (Ивановская область)</option>
+            <option class="dropdown-item" value="Бабушкин (Республика Бурятия)">Бабушкин (Республика Бурятия)</option>
+            <option class="dropdown-item" value="Надым (Ямало-Ненецкий автономный округ)">Надым (Ямало-Ненецкий автономный округ)</option>
+            <option class="dropdown-item" value="Бавлы (Республика Татарстан)">Бавлы (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Назарово (Красноярский край)">Назарово (Красноярский край)</option>
+            <option class="dropdown-item" value="Багратионовск (Калининградская область)">Багратионовск (Калининградская область)</option>
+            <option class="dropdown-item" value="Назрань (Республика Ингушетия)">Назрань (Республика Ингушетия)</option>
+            <option class="dropdown-item" value="Байкальск (Иркутская область)">Байкальск (Иркутская область)</option>
+            <option class="dropdown-item" value="Называевск (Омская область)">Называевск (Омская область)</option>
+            <option class="dropdown-item" value="Баймак (Республика Башкортостан)">Баймак (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Нальчик (Кабардино-Балкарская Республика)">Нальчик (Кабардино-Балкарская Республика)</option>
+            <option class="dropdown-item" value="Бакал (Челябинская область)">Бакал (Челябинская область)</option>
+            <option class="dropdown-item" value="Нариманов (Астраханская область)">Нариманов (Астраханская область)</option>
+            <option class="dropdown-item" value="Баксан (Кабардино-Балкарская Республика)">Баксан (Кабардино-Балкарская Республика)</option>
+            <option class="dropdown-item" value="Наро-Фоминск (Московская область)">Наро-Фоминск (Московская область)</option>
+            <option class="dropdown-item" value="Балабаново (Калужская область)">Балабаново (Калужская область)</option>
+            <option class="dropdown-item" value="Нарткала (Кабардино-Балкарская Республика)">Нарткала (Кабардино-Балкарская Республика)</option>
+            <option class="dropdown-item" value="Балаково (Саратовская область)">Балаково (Саратовская область)</option>
+            <option class="dropdown-item" value="Нарьян-Мар (Ненецкий автономный округ)">Нарьян-Мар (Ненецкий автономный округ)</option>
+            <option class="dropdown-item" value="Балахна (Нижегородская область)">Балахна (Нижегородская область)</option>
+            <option class="dropdown-item" value="Находка (Приморский край)">Находка (Приморский край)</option>
+            <option class="dropdown-item" value="Балашиха (Московская область)">Балашиха (Московская область)</option>
+            <option class="dropdown-item" value="Невель (Псковская область)">Невель (Псковская область)</option>
+            <option class="dropdown-item" value="Балашов (Саратовская область)">Балашов (Саратовская область)</option>
+            <option class="dropdown-item" value="Невельск (Сахалинская область)">Невельск (Сахалинская область)</option>
+            <option class="dropdown-item" value="Балей (Забайкальский край)">Балей (Забайкальский край)</option>
+            <option class="dropdown-item" value="Невинномысск (Ставропольский край)">Невинномысск (Ставропольский край)</option>
+            <option class="dropdown-item" value="Балтийск (Калининградская область)">Балтийск (Калининградская область)</option>
+            <option class="dropdown-item" value="Невьянск (Свердловская область)">Невьянск (Свердловская область)</option>
+            <option class="dropdown-item" value="Барабинск (Новосибирская область)">Барабинск (Новосибирская область)</option>
+            <option class="dropdown-item" value="Нелидово (Тверская область)">Нелидово (Тверская область)</option>
+            <option class="dropdown-item" value="Барнаул (Алтайский край)">Барнаул (Алтайский край)</option>
+            <option class="dropdown-item" value="Неман (Калининградская область)">Неман (Калининградская область)</option>
+            <option class="dropdown-item" value="Барыш (Ульяновская область)">Барыш (Ульяновская область)</option>
+            <option class="dropdown-item" value="Нерехта (Костромская область)">Нерехта (Костромская область)</option>
+            <option class="dropdown-item" value="Батайск (Ростовская область)">Батайск (Ростовская область)</option>
+            <option class="dropdown-item" value="Нерчинск (Забайкальский край)">Нерчинск (Забайкальский край)</option>
+            <option class="dropdown-item" value="Бахчисарай (Республика Крым)">Бахчисарай (Республика Крым)</option>
+            <option class="dropdown-item" value="Нерюнгри (Республика Саха (Якутия))">Нерюнгри (Республика Саха (Якутия))</option>
+            <option class="dropdown-item" value="Бежецк (Тверская область)">Бежецк (Тверская область)</option>
+            <option class="dropdown-item" value="Нестеров (Калининградская область)">Нестеров (Калининградская область)</option>
+            <option class="dropdown-item" value="Белёв (Тульская область)">Белёв (Тульская область)</option>
+            <option class="dropdown-item" value="Нефтегорск (Самарская область)">Нефтегорск (Самарская область)</option>
+            <option class="dropdown-item" value="Белая Калитва (Ростовская область)">Белая Калитва (Ростовская область)</option>
+            <option class="dropdown-item" value="Нефтекамск (Республика Башкортостан)">Нефтекамск (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Белая Холуница (Кировская область)">Белая Холуница (Кировская область)</option>
+            <option class="dropdown-item" value="Нефтекумск (Ставропольский край)">Нефтекумск (Ставропольский край)</option>
+            <option class="dropdown-item" value="Белгород">Белгород</option>
+            <option class="dropdown-item" value="Нефтеюганск (Ханты-Мансийский автономный округ - Югра)">Нефтеюганск (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Белебей (Республика Башкортостан)">Белебей (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Нея (Костромская область)">Нея (Костромская область)</option>
+            <option class="dropdown-item" value="Белинский (Пензенская область)">Белинский (Пензенская область)</option>
+            <option class="dropdown-item" value="Нижневартовск (Ханты-Мансийский автономный округ - Югра)">Нижневартовск (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Белово (Кемеровская область)">Белово (Кемеровская область)</option>
+            <option class="dropdown-item" value="Нижнекамск (Республика Татарстан)">Нижнекамск (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Белогорск (Амурская область)">Белогорск (Амурская область)</option>
+            <option class="dropdown-item" value="Нижнеудинск (Иркутская область)">Нижнеудинск (Иркутская область)</option>
+            <option class="dropdown-item" value="Белогорск (Республика Крым)">Белогорск (Республика Крым)</option>
+            <option class="dropdown-item" value="Нижние Серги (Свердловская область)">Нижние Серги (Свердловская область)</option>
+            <option class="dropdown-item" value="Белозерск (Вологодская область)">Белозерск (Вологодская область)</option>
+            <option class="dropdown-item" value="Нижний Ломов (Пензенская область)">Нижний Ломов (Пензенская область)</option>
+            <option class="dropdown-item" value="Белокуриха (Алтайский край)">Белокуриха (Алтайский край)</option>
+            <option class="dropdown-item" value="Нижний Новгород">Нижний Новгород</option>
+            <option class="dropdown-item" value="Беломорск (Республика Карелия)">Беломорск (Республика Карелия)</option>
+            <option class="dropdown-item" value="Нижний Тагил (Свердловская область)">Нижний Тагил (Свердловская область)</option>
+            <option class="dropdown-item" value="Белорецк (Республика Башкортостан)">Белорецк (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Нижняя Салда (Свердловская область)">Нижняя Салда (Свердловская область)</option>
+            <option class="dropdown-item" value="Белореченск (Краснодарский край)">Белореченск (Краснодарский край)</option>
+            <option class="dropdown-item" value="Нижняя Тура (Свердловская область)">Нижняя Тура (Свердловская область)</option>
+            <option class="dropdown-item" value="Белоусово (Калужская область)">Белоусово (Калужская область)</option>
+            <option class="dropdown-item" value="Николаевск (Волгоградская область)">Николаевск (Волгоградская область)</option>
+            <option class="dropdown-item" value="Белоярский (Ханты-Мансийский автономный округ - Югра)">Белоярский (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Николаевск-на-Амуре (Хабаровский край)">Николаевск-на-Амуре (Хабаровский край)</option>
+            <option class="dropdown-item" value="Белый (Тверская область)">Белый (Тверская область)</option>
+            <option class="dropdown-item" value="Никольск (Вологодская область)">Никольск (Вологодская область)</option>
+            <option class="dropdown-item" value="Берёзовский (Кемеровская область)">Берёзовский (Кемеровская область)</option>
+            <option class="dropdown-item" value="Никольск (Пензенская область)">Никольск (Пензенская область)</option>
+            <option class="dropdown-item" value="Берёзовский (Свердловская область)">Берёзовский (Свердловская область)</option>
+            <option class="dropdown-item" value="Никольское (Ленинградская область)">Никольское (Ленинградская область)</option>
+            <option class="dropdown-item" value="Бердск (Новосибирская область)">Бердск (Новосибирская область)</option>
+            <option class="dropdown-item" value="Новая Ладога (Ленинградская область)">Новая Ладога (Ленинградская область)</option>
+            <option class="dropdown-item" value="Березники (Пермский край)">Березники (Пермский край)</option>
+            <option class="dropdown-item" value="Новая Ляля (Свердловская область)">Новая Ляля (Свердловская область)</option>
+            <option class="dropdown-item" value="Беслан (Республика Северная Осетия - Алания)">Беслан (Республика Северная Осетия - Алания)</option>
+            <option class="dropdown-item" value="Новоалександровск (Ставропольский край)">Новоалександровск (Ставропольский край)</option>
+            <option class="dropdown-item" value="Бийск (Алтайский край)">Бийск (Алтайский край)</option>
+            <option class="dropdown-item" value="Новоалтайск (Алтайский край)">Новоалтайск (Алтайский край)</option>
+            <option class="dropdown-item" value="Бикин (Хабаровский край)">Бикин (Хабаровский край)</option>
+            <option class="dropdown-item" value="Новоаннинский (Волгоградская область)">Новоаннинский (Волгоградская область)</option>
+            <option class="dropdown-item" value="Билибино (Чукотский автономный округ)">Билибино (Чукотский автономный округ)</option>
+            <option class="dropdown-item" value="Нововоронеж (Воронежская область)">Нововоронеж (Воронежская область)</option>
+            <option class="dropdown-item" value="Биробиджан (Еврейская автономная область)">Биробиджан (Еврейская автономная область)</option>
+            <option class="dropdown-item" value="Новодвинск (Архангельская область)">Новодвинск (Архангельская область)</option>
+            <option class="dropdown-item" value="Бирск (Республика Башкортостан)">Бирск (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Новозыбков (Брянская область)">Новозыбков (Брянская область)</option>
+            <option class="dropdown-item" value="Бирюсинск (Иркутская область)">Бирюсинск (Иркутская область)</option>
+            <option class="dropdown-item" value="Новокубанск (Краснодарский край)">Новокубанск (Краснодарский край)</option>
+            <option class="dropdown-item" value="Бирюч (Белгородская область)">Бирюч (Белгородская область)</option>
+            <option class="dropdown-item" value="Новокузнецк (Кемеровская область)">Новокузнецк (Кемеровская область)</option>
+            <option class="dropdown-item" value="Благовещенск (Амурская область)">Благовещенск (Амурская область)</option>
+            <option class="dropdown-item" value="Новокуйбышевск (Самарская область)">Новокуйбышевск (Самарская область)</option>
+            <option class="dropdown-item" value="Благовещенск (Республика Башкортостан)">Благовещенск (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Новомичуринск (Рязанская область)">Новомичуринск (Рязанская область)</option>
+            <option class="dropdown-item" value="Благодарный (Ставропольский край)">Благодарный (Ставропольский край)</option>
+            <option class="dropdown-item" value="Новомосковск (Тульская область)">Новомосковск (Тульская область)</option>
+            <option class="dropdown-item" value="Бобров (Воронежская область)">Бобров (Воронежская область)</option>
+            <option class="dropdown-item" value="Новопавловск (Ставропольский край)">Новопавловск (Ставропольский край)</option>
+            <option class="dropdown-item" value="Богданович (Свердловская область)">Богданович (Свердловская область)</option>
+            <option class="dropdown-item" value="Новоржев (Псковская область)">Новоржев (Псковская область)</option>
+            <option class="dropdown-item" value="Богородицк (Тульская область)">Богородицк (Тульская область)</option>
+            <option class="dropdown-item" value="Новороссийск (Краснодарский край)">Новороссийск (Краснодарский край)</option>
+            <option class="dropdown-item" value="Богородск (Нижегородская область)">Богородск (Нижегородская область)</option>
+            <option class="dropdown-item" value="Новосибирск">Новосибирск</option>
+            <option class="dropdown-item" value="Боготол (Красноярский край)">Боготол (Красноярский край)</option>
+            <option class="dropdown-item" value="Новосиль (Орловская область)">Новосиль (Орловская область)</option>
+            <option class="dropdown-item" value="Богучар (Воронежская область)">Богучар (Воронежская область)</option>
+            <option class="dropdown-item" value="Новосокольники (Псковская область)">Новосокольники (Псковская область)</option>
+            <option class="dropdown-item" value="Бодайбо (Иркутская область)">Бодайбо (Иркутская область)</option>
+            <option class="dropdown-item" value="Новотроицк (Оренбургская область)">Новотроицк (Оренбургская область)</option>
+            <option class="dropdown-item" value="Бокситогорск (Ленинградская область)">Бокситогорск (Ленинградская область)</option>
+            <option class="dropdown-item" value="Новоузенск (Саратовская область)">Новоузенск (Саратовская область)</option>
+            <option class="dropdown-item" value="Болгар (Республика Татарстан)">Болгар (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Новоульяновск (Ульяновская область)">Новоульяновск (Ульяновская область)</option>
+            <option class="dropdown-item" value="Бологое (Тверская область)">Бологое (Тверская область)</option>
+            <option class="dropdown-item" value="Новоуральск (Свердловская область)">Новоуральск (Свердловская область)</option>
+            <option class="dropdown-item" value="Болотное (Новосибирская область)">Болотное (Новосибирская область)</option>
+            <option class="dropdown-item" value="Новохопёрск (Воронежская область)">Новохопёрск (Воронежская область)</option>
+            <option class="dropdown-item" value="Болохово (Тульская область)">Болохово (Тульская область)</option>
+            <option class="dropdown-item" value="Новочебоксарск (Чувашская Республика - Чувашия)">Новочебоксарск (Чувашская Республика - Чувашия)</option>
+            <option class="dropdown-item" value="Болхов (Орловская область)">Болхов (Орловская область)</option>
+            <option class="dropdown-item" value="Новочеркасск (Ростовская область)">Новочеркасск (Ростовская область)</option>
+            <option class="dropdown-item" value="Большой Камень (Приморский край)">Большой Камень (Приморский край)</option>
+            <option class="dropdown-item" value="Новошахтинск (Ростовская область)">Новошахтинск (Ростовская область)</option>
+            <option class="dropdown-item" value="Бор (Нижегородская область)">Бор (Нижегородская область)</option>
+            <option class="dropdown-item" value="Новый Оскол (Белгородская область)">Новый Оскол (Белгородская область)</option>
+            <option class="dropdown-item" value="Борзя (Забайкальский край)">Борзя (Забайкальский край)</option>
+            <option class="dropdown-item" value="Новый Уренгой (Ямало-Ненецкий автономный округ)">Новый Уренгой (Ямало-Ненецкий автономный округ)</option>
+            <option class="dropdown-item" value="Борисоглебск (Воронежская область)">Борисоглебск (Воронежская область)</option>
+            <option class="dropdown-item" value="Ногинск (Московская область)">Ногинск (Московская область)</option>
+            <option class="dropdown-item" value="Боровичи (Новгородская область)">Боровичи (Новгородская область)</option>
+            <option class="dropdown-item" value="Нолинск (Кировская область)">Нолинск (Кировская область)</option>
+            <option class="dropdown-item" value="Боровск (Калужская область)">Боровск (Калужская область)</option>
+            <option class="dropdown-item" value="Норильск (Красноярский край)">Норильск (Красноярский край)</option>
+            <option class="dropdown-item" value="Бородино (Красноярский край)">Бородино (Красноярский край)</option>
+            <option class="dropdown-item" value="Ноябрьск (Ямало-Ненецкий автономный округ)">Ноябрьск (Ямало-Ненецкий автономный округ)</option>
+            <option class="dropdown-item" value="Братск (Иркутская область)">Братск (Иркутская область)</option>
+            <option class="dropdown-item" value="Нурлат (Республика Татарстан)">Нурлат (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Бронницы (Московская область)">Бронницы (Московская область)</option>
+            <option class="dropdown-item" value="Нытва (Пермский край)">Нытва (Пермский край)</option>
+            <option class="dropdown-item" value="Брянск">Брянск</option>
+            <option class="dropdown-item" value="Нюрба (Республика Саха (Якутия))">Нюрба (Республика Саха (Якутия))</option>
+            <option class="dropdown-item" value="Бугульма (Республика Татарстан)">Бугульма (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Нягань (Ханты-Мансийский автономный округ - Югра)">Нягань (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Бугуруслан (Оренбургская область)">Бугуруслан (Оренбургская область)</option>
+            <option class="dropdown-item" value="Нязепетровск (Челябинская область)">Нязепетровск (Челябинская область)</option>
+            <option class="dropdown-item" value="Будённовск (Ставропольский край)">Будённовск (Ставропольский край)</option>
+            <option class="dropdown-item" value="Няндома (Архангельская область)">Няндома (Архангельская область)</option>
+            <option class="dropdown-item" value="Бузулук (Оренбургская область)">Бузулук (Оренбургская область)</option>
+            <option class="dropdown-item" value="Облучье (Еврейская автономная область)">Облучье (Еврейская автономная область)</option>
+            <option class="dropdown-item" value="Буинск (Республика Татарстан)">Буинск (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Обнинск (Калужская область)">Обнинск (Калужская область)</option>
+            <option class="dropdown-item" value="Буй (Костромская область)">Буй (Костромская область)</option>
+            <option class="dropdown-item" value="Обоянь (Курская область)">Обоянь (Курская область)</option>
+            <option class="dropdown-item" value="Буйнакск (Республика Дагестан)">Буйнакск (Республика Дагестан)</option>
+            <option class="dropdown-item" value="Обь (Новосибирская область)">Обь (Новосибирская область)</option>
+            <option class="dropdown-item" value="Бутурлиновка (Воронежская область)">Бутурлиновка (Воронежская область)</option>
+            <option class="dropdown-item" value="Одинцово (Московская область)">Одинцово (Московская область)</option>
+            <option class="dropdown-item" value="Валдай (Новгородская область)">Валдай (Новгородская область)</option>
+            <option class="dropdown-item" value="Озёрск (Калининградская область)">Озёрск (Калининградская область)</option>
+            <option class="dropdown-item" value="Валуйки (Белгородская область)">Валуйки (Белгородская область)</option>
+            <option class="dropdown-item" value="Озёрск (Челябинская область)">Озёрск (Челябинская область)</option>
+            <option class="dropdown-item" value="Велиж (Смоленская область)">Велиж (Смоленская область)</option>
+            <option class="dropdown-item" value="Озёры (Московская область)">Озёры (Московская область)</option>
+            <option class="dropdown-item" value="Великие Луки (Псковская область)">Великие Луки (Псковская область)</option>
+            <option class="dropdown-item" value="Октябрьск (Самарская область)">Октябрьск (Самарская область)</option>
+            <option class="dropdown-item" value="Великий Новгород (Новгородская область)">Великий Новгород (Новгородская область)</option>
+            <option class="dropdown-item" value="Октябрьский (Республика Башкортостан)">Октябрьский (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Великий Устюг (Вологодская область)">Великий Устюг (Вологодская область)</option>
+            <option class="dropdown-item" value="Окуловка (Новгородская область)">Окуловка (Новгородская область)</option>
+            <option class="dropdown-item" value="Вельск (Архангельская область)">Вельск (Архангельская область)</option>
+            <option class="dropdown-item" value="Олёкминск (Республика Саха (Якутия))">Олёкминск (Республика Саха (Якутия))</option>
+            <option class="dropdown-item" value="Венёв (Тульская область)">Венёв (Тульская область)</option>
+            <option class="dropdown-item" value="Оленегорск (Мурманская область)">Оленегорск (Мурманская область)</option>
+            <option class="dropdown-item" value="Верещагино (Пермский край)">Верещагино (Пермский край)</option>
+            <option class="dropdown-item" value="Олонец (Республика Карелия)">Олонец (Республика Карелия)</option>
+            <option class="dropdown-item" value="Верея (Московская область)">Верея (Московская область)</option>
+            <option class="dropdown-item" value="Омск">Омск</option>
+            <option class="dropdown-item" value="Верхнеуральск (Челябинская область)">Верхнеуральск (Челябинская область)</option>
+            <option class="dropdown-item" value="Омутнинск (Кировская область)">Омутнинск (Кировская область)</option>
+            <option class="dropdown-item" value="Верхний Тагил (Свердловская область)">Верхний Тагил (Свердловская область)</option>
+            <option class="dropdown-item" value="Онега (Архангельская область)">Онега (Архангельская область)</option>
+            <option class="dropdown-item" value="Верхний Уфалей (Челябинская область)">Верхний Уфалей (Челябинская область)</option>
+            <option class="dropdown-item" value="Опочка (Псковская область)">Опочка (Псковская область)</option>
+            <option class="dropdown-item" value="Верхняя Пышма (Свердловская область)">Верхняя Пышма (Свердловская область)</option>
+            <option class="dropdown-item" value="Орёл">Орёл</option>
+            <option class="dropdown-item" value="Верхняя Салда (Свердловская область)">Верхняя Салда (Свердловская область)</option>
+            <option class="dropdown-item" value="Оренбург">Оренбург</option>
+            <option class="dropdown-item" value="Верхняя Тура (Свердловская область)">Верхняя Тура (Свердловская область)</option>
+            <option class="dropdown-item" value="Орехово-Зуево (Московская область)">Орехово-Зуево (Московская область)</option>
+            <option class="dropdown-item" value="Верхотурье (Свердловская область)">Верхотурье (Свердловская область)</option>
+            <option class="dropdown-item" value="Орлов (Кировская область)">Орлов (Кировская область)</option>
+            <option class="dropdown-item" value="Верхоянск (Республика Саха (Якутия))">Верхоянск (Республика Саха (Якутия))</option>
+            <option class="dropdown-item" value="Орск (Оренбургская область)">Орск (Оренбургская область)</option>
+            <option class="dropdown-item" value="Весьегонск (Тверская область)">Весьегонск (Тверская область)</option>
+            <option class="dropdown-item" value="Оса (Пермский край)">Оса (Пермский край)</option>
+            <option class="dropdown-item" value="Ветлуга (Нижегородская область)">Ветлуга (Нижегородская область)</option>
+            <option class="dropdown-item" value="Осинники (Кемеровская область)">Осинники (Кемеровская область)</option>
+            <option class="dropdown-item" value="Видное (Московская область)">Видное (Московская область)</option>
+            <option class="dropdown-item" value="Осташков (Тверская область)">Осташков (Тверская область)</option>
+            <option class="dropdown-item" value="Вилюйск (Республика Саха (Якутия))">Вилюйск (Республика Саха (Якутия))</option>
+            <option class="dropdown-item" value="Остров (Псковская область)">Остров (Псковская область)</option>
+            <option class="dropdown-item" value="Вилючинск (Камчатский край)">Вилючинск (Камчатский край)</option>
+            <option class="dropdown-item" value="Островной (Мурманская область)">Островной (Мурманская область)</option>
+            <option class="dropdown-item" value="Вихоревка (Иркутская область)">Вихоревка (Иркутская область)</option>
+            <option class="dropdown-item" value="Острогожск (Воронежская область)">Острогожск (Воронежская область)</option>
+            <option class="dropdown-item" value="Вичуга (Ивановская область)">Вичуга (Ивановская область)</option>
+            <option class="dropdown-item" value="Отрадное (Ленинградская область)">Отрадное (Ленинградская область)</option>
+            <option class="dropdown-item" value="Владивосток (Приморский край)">Владивосток (Приморский край)</option>
+            <option class="dropdown-item" value="Отрадный (Самарская область)">Отрадный (Самарская область)</option>
+            <option class="dropdown-item" value="Владикавказ (Республика Северная Осетия - Алания)">Владикавказ (Республика Северная Осетия - Алания)</option>
+            <option class="dropdown-item" value="Оха (Сахалинская область)">Оха (Сахалинская область)</option>
+            <option class="dropdown-item" value="Владимир">Владимир</option>
+            <option class="dropdown-item" value="Оханск (Пермский край)">Оханск (Пермский край)</option>
+            <option class="dropdown-item" value="Волгоград">Волгоград</option>
+            <option class="dropdown-item" value="Очёр (Пермский край)">Очёр (Пермский край)</option>
+            <option class="dropdown-item" value="Волгодонск (Ростовская область)">Волгодонск (Ростовская область)</option>
+            <option class="dropdown-item" value="Павлово (Нижегородская область)">Павлово (Нижегородская область)</option>
+            <option class="dropdown-item" value="Волгореченск (Костромская область)">Волгореченск (Костромская область)</option>
+            <option class="dropdown-item" value="Павловск (Воронежская область)">Павловск (Воронежская область)</option>
+            <option class="dropdown-item" value="Волжск (Республика Марий Эл)">Волжск (Республика Марий Эл)</option>
+            <option class="dropdown-item" value="Павловский Посад (Московская область)">Павловский Посад (Московская область)</option>
+            <option class="dropdown-item" value="Волжский (Волгоградская область)">Волжский (Волгоградская область)</option>
+            <option class="dropdown-item" value="Палласовка (Волгоградская область)">Палласовка (Волгоградская область)</option>
+            <option class="dropdown-item" value="Вологда">Вологда</option>
+            <option class="dropdown-item" value="Партизанск (Приморский край)">Партизанск (Приморский край)</option>
+            <option class="dropdown-item" value="Володарск (Нижегородская область)">Володарск (Нижегородская область)</option>
+            <option class="dropdown-item" value="Певек (Чукотский автономный округ)">Певек (Чукотский автономный округ)</option>
+            <option class="dropdown-item" value="Волоколамск (Московская область)">Волоколамск (Московская область)</option>
+            <option class="dropdown-item" value="Пенза">Пенза</option>
+            <option class="dropdown-item" value="Волосово (Ленинградская область)">Волосово (Ленинградская область)</option>
+            <option class="dropdown-item" value="Первомайск (Нижегородская область)">Первомайск (Нижегородская область)</option>
+            <option class="dropdown-item" value="Волхов (Ленинградская область)">Волхов (Ленинградская область)</option>
+            <option class="dropdown-item" value="Первоуральск (Свердловская область)">Первоуральск (Свердловская область)</option>
+            <option class="dropdown-item" value="Волчанск (Свердловская область)">Волчанск (Свердловская область)</option>
+            <option class="dropdown-item" value="Перевоз (Нижегородская область)">Перевоз (Нижегородская область)</option>
+            <option class="dropdown-item" value="Вольск (Саратовская область)">Вольск (Саратовская область)</option>
+            <option class="dropdown-item" value="Пересвет (Московская область)">Пересвет (Московская область)</option>
+            <option class="dropdown-item" value="Воркута (Республика Коми)">Воркута (Республика Коми)</option>
+            <option class="dropdown-item" value="Переславль-Залесский (Ярославская область)">Переславль-Залесский (Ярославская область)</option>
+            <option class="dropdown-item" value="Воронеж">Воронеж</option>
+            <option class="dropdown-item" value="Пермь">Пермь</option>
+            <option class="dropdown-item" value="Ворсма (Нижегородская область)">Ворсма (Нижегородская область)</option>
+            <option class="dropdown-item" value="Пестово (Новгородская область)">Пестово (Новгородская область)</option>
+            <option class="dropdown-item" value="Воскресенск (Московская область)">Воскресенск (Московская область)</option>
+            <option class="dropdown-item" value="Петров Вал (Волгоградская область)">Петров Вал (Волгоградская область)</option>
+            <option class="dropdown-item" value="Воткинск (Удмуртская Республика)">Воткинск (Удмуртская Республика)</option>
+            <option class="dropdown-item" value="Петровск (Саратовская область)">Петровск (Саратовская область)</option>
+            <option class="dropdown-item" value="Всеволожск (Ленинградская область)">Всеволожск (Ленинградская область)</option>
+            <option class="dropdown-item" value="Петровск-Забайкальский (Забайкальский край)">Петровск-Забайкальский (Забайкальский край)</option>
+            <option class="dropdown-item" value="Вуктыл (Республика Коми)">Вуктыл (Республика Коми)</option>
+            <option class="dropdown-item" value="Петрозаводск (Республика Карелия)">Петрозаводск (Республика Карелия)</option>
+            <option class="dropdown-item" value="Выборг (Ленинградская область)">Выборг (Ленинградская область)</option>
+            <option class="dropdown-item" value="Петропавловск-Камчатский (Камчатский край)">Петропавловск-Камчатский (Камчатский край)</option>
+            <option class="dropdown-item" value="Выкса (Нижегородская область)">Выкса (Нижегородская область)</option>
+            <option class="dropdown-item" value="Петухово (Курганская область)">Петухово (Курганская область)</option>
+            <option class="dropdown-item" value="Высоковск (Московская область)">Высоковск (Московская область)</option>
+            <option class="dropdown-item" value="Петушки (Владимирская область)">Петушки (Владимирская область)</option>
+            <option class="dropdown-item" value="Высоцк (Ленинградская область)">Высоцк (Ленинградская область)</option>
+            <option class="dropdown-item" value="Печора (Республика Коми)">Печора (Республика Коми)</option>
+            <option class="dropdown-item" value="Вытегра (Вологодская область)">Вытегра (Вологодская область)</option>
+            <option class="dropdown-item" value="Печоры (Псковская область)">Печоры (Псковская область)</option>
+            <option class="dropdown-item" value="Вышний Волочёк (Тверская область)">Вышний Волочёк (Тверская область)</option>
+            <option class="dropdown-item" value="Пикалёво (Ленинградская область)">Пикалёво (Ленинградская область)</option>
+            <option class="dropdown-item" value="Вяземский (Хабаровский край)">Вяземский (Хабаровский край)</option>
+            <option class="dropdown-item" value="Пионерский (Калининградская область)">Пионерский (Калининградская область)</option>
+            <option class="dropdown-item" value="Вязники (Владимирская область)">Вязники (Владимирская область)</option>
+            <option class="dropdown-item" value="Питкяранта (Республика Карелия)">Питкяранта (Республика Карелия)</option>
+            <option class="dropdown-item" value="Вязьма (Смоленская область)">Вязьма (Смоленская область)</option>
+            <option class="dropdown-item" value="Плёс (Ивановская область)">Плёс (Ивановская область)</option>
+            <option class="dropdown-item" value="Вятские Поляны (Кировская область)">Вятские Поляны (Кировская область)</option>
+            <option class="dropdown-item" value="Плавск (Тульская область)">Плавск (Тульская область)</option>
+            <option class="dropdown-item" value="Гаврилов Посад (Ивановская область)">Гаврилов Посад (Ивановская область)</option>
+            <option class="dropdown-item" value="Пласт (Челябинская область)">Пласт (Челябинская область)</option>
+            <option class="dropdown-item" value="Гаврилов-Ям (Ярославская область)">Гаврилов-Ям (Ярославская область)</option>
+            <option class="dropdown-item" value="Поворино (Воронежская область)">Поворино (Воронежская область)</option>
+            <option class="dropdown-item" value="Гагарин (Смоленская область)">Гагарин (Смоленская область)</option>
+            <option class="dropdown-item" value="Подольск (Московская область)">Подольск (Московская область)</option>
+            <option class="dropdown-item" value="Гаджиево (Мурманская область)">Гаджиево (Мурманская область)</option>
+            <option class="dropdown-item" value="Подпорожье (Ленинградская область)">Подпорожье (Ленинградская область)</option>
+            <option class="dropdown-item" value="Гай (Оренбургская область)">Гай (Оренбургская область)</option>
+            <option class="dropdown-item" value="Покачи (Ханты-Мансийский автономный округ - Югра)">Покачи (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Галич (Костромская область)">Галич (Костромская область)</option>
+            <option class="dropdown-item" value="Покров (Владимирская область)">Покров (Владимирская область)</option>
+            <option class="dropdown-item" value="Гатчина (Ленинградская область)">Гатчина (Ленинградская область)</option>
+            <option class="dropdown-item" value="Покровск (Республика Саха (Якутия))">Покровск (Республика Саха (Якутия))</option>
+            <option class="dropdown-item" value="Гвардейск (Калининградская область)">Гвардейск (Калининградская область)</option>
+            <option class="dropdown-item" value="Полевской (Свердловская область)">Полевской (Свердловская область)</option>
+            <option class="dropdown-item" value="Гдов (Псковская область)">Гдов (Псковская область)</option>
+            <option class="dropdown-item" value="Полесск (Калининградская область)">Полесск (Калининградская область)</option>
+            <option class="dropdown-item" value="Геленджик (Краснодарский край)">Геленджик (Краснодарский край)</option>
+            <option class="dropdown-item" value="Полысаево (Кемеровская область)">Полысаево (Кемеровская область)</option>
+            <option class="dropdown-item" value="Георгиевск (Ставропольский край)">Георгиевск (Ставропольский край)</option>
+            <option class="dropdown-item" value="Полярные Зори (Мурманская область)">Полярные Зори (Мурманская область)</option>
+            <option class="dropdown-item" value="Глазов (Удмуртская Республика)">Глазов (Удмуртская Республика)</option>
+            <option class="dropdown-item" value="Полярный (Мурманская область)">Полярный (Мурманская область)</option>
+            <option class="dropdown-item" value="Голицыно (Московская область)">Голицыно (Московская область)</option>
+            <option class="dropdown-item" value="Поронайск (Сахалинская область)">Поронайск (Сахалинская область)</option>
+            <option class="dropdown-item" value="Горбатов (Нижегородская область)">Горбатов (Нижегородская область)</option>
+            <option class="dropdown-item" value="Порхов (Псковская область)">Порхов (Псковская область)</option>
+            <option class="dropdown-item" value="Горно-Алтайск (Республика Алтай)">Горно-Алтайск (Республика Алтай)</option>
+            <option class="dropdown-item" value="Похвистнево (Самарская область)">Похвистнево (Самарская область)</option>
+            <option class="dropdown-item" value="Горнозаводск (Пермский край)">Горнозаводск (Пермский край)</option>
+            <option class="dropdown-item" value="Почеп (Брянская область)">Почеп (Брянская область)</option>
+            <option class="dropdown-item" value="Горняк (Алтайский край)">Горняк (Алтайский край)</option>
+            <option class="dropdown-item" value="Починок (Смоленская область)">Починок (Смоленская область)</option>
+            <option class="dropdown-item" value="Городец (Нижегородская область)">Городец (Нижегородская область)</option>
+            <option class="dropdown-item" value="Пошехонье (Ярославская область)">Пошехонье (Ярославская область)</option>
+            <option class="dropdown-item" value="Городище (Пензенская область)">Городище (Пензенская область)</option>
+            <option class="dropdown-item" value="Правдинск (Калининградская область)">Правдинск (Калининградская область)</option>
+            <option class="dropdown-item" value="Городовиковск (Республика Калмыкия)">Городовиковск (Республика Калмыкия)</option>
+            <option class="dropdown-item" value="Приволжск (Ивановская область)">Приволжск (Ивановская область)</option>
+            <option class="dropdown-item" value="Гороховец (Владимирская область)">Гороховец (Владимирская область)</option>
+            <option class="dropdown-item" value="Приморск (Калининградская область)">Приморск (Калининградская область)</option>
+            <option class="dropdown-item" value="Горячий Ключ (Краснодарский край)">Горячий Ключ (Краснодарский край)</option>
+            <option class="dropdown-item" value="Приморск (Ленинградская область)">Приморск (Ленинградская область)</option>
+            <option class="dropdown-item" value="Грайворон (Белгородская область)">Грайворон (Белгородская область)</option>
+            <option class="dropdown-item" value="Приморско-Ахтарск (Краснодарский край)">Приморско-Ахтарск (Краснодарский край)</option>
+            <option class="dropdown-item" value="Гремячинск (Пермский край)">Гремячинск (Пермский край)</option>
+            <option class="dropdown-item" value="Приозерск (Ленинградская область)">Приозерск (Ленинградская область)</option>
+            <option class="dropdown-item" value="Грозный (Чеченская Республика)">Грозный (Чеченская Республика)</option>
+            <option class="dropdown-item" value="Прокопьевск (Кемеровская область)">Прокопьевск (Кемеровская область)</option>
+            <option class="dropdown-item" value="Грязи (Липецкая область)">Грязи (Липецкая область)</option>
+            <option class="dropdown-item" value="Пролетарск (Ростовская область)">Пролетарск (Ростовская область)</option>
+            <option class="dropdown-item" value="Грязовец (Вологодская область)">Грязовец (Вологодская область)</option>
+            <option class="dropdown-item" value="Протвино (Московская область)">Протвино (Московская область)</option>
+            <option class="dropdown-item" value="Губаха (Пермский край)">Губаха (Пермский край)</option>
+            <option class="dropdown-item" value="Прохладный (Кабардино-Балкарская Республика)">Прохладный (Кабардино-Балкарская Республика)</option>
+            <option class="dropdown-item" value="Губкин (Белгородская область)">Губкин (Белгородская область)</option>
+            <option class="dropdown-item" value="Псков">Псков</option>
+            <option class="dropdown-item" value="Губкинский (Ямало-Ненецкий автономный округ)">Губкинский (Ямало-Ненецкий автономный округ)</option>
+            <option class="dropdown-item" value="Пугачёв (Саратовская область)">Пугачёв (Саратовская область)</option>
+            <option class="dropdown-item" value="Гудермес (Чеченская Республика)">Гудермес (Чеченская Республика)</option>
+            <option class="dropdown-item" value="Пудож (Республика Карелия)">Пудож (Республика Карелия)</option>
+            <option class="dropdown-item" value="Гуково (Ростовская область)">Гуково (Ростовская область)</option>
+            <option class="dropdown-item" value="Пустошка (Псковская область)">Пустошка (Псковская область)</option>
+            <option class="dropdown-item" value="Гулькевичи (Краснодарский край)">Гулькевичи (Краснодарский край)</option>
+            <option class="dropdown-item" value="Пучеж (Ивановская область)">Пучеж (Ивановская область)</option>
+            <option class="dropdown-item" value="Гурьевск (Калининградская область)">Гурьевск (Калининградская область)</option>
+            <option class="dropdown-item" value="Пушкино (Московская область)">Пушкино (Московская область)</option>
+            <option class="dropdown-item" value="Гурьевск (Кемеровская область)">Гурьевск (Кемеровская область)</option>
+            <option class="dropdown-item" value="Пущино (Московская область)">Пущино (Московская область)</option>
+            <option class="dropdown-item" value="Гусев (Калининградская область)">Гусев (Калининградская область)</option>
+            <option class="dropdown-item" value="Пыталово (Псковская область)">Пыталово (Псковская область)</option>
+            <option class="dropdown-item" value="Гусиноозёрск (Республика Бурятия)">Гусиноозёрск (Республика Бурятия)</option>
+            <option class="dropdown-item" value="Пыть-Ях (Ханты-Мансийский автономный округ - Югра)">Пыть-Ях (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Гусь-Хрустальный (Владимирская область)">Гусь-Хрустальный (Владимирская область)</option>
+            <option class="dropdown-item" value="Пятигорск (Ставропольский край)">Пятигорск (Ставропольский край)</option>
+            <option class="dropdown-item" value="Давлеканово (Республика Башкортостан)">Давлеканово (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Радужный (Владимирская область)">Радужный (Владимирская область)</option>
+            <option class="dropdown-item" value="Дагестанские Огни (Республика Дагестан)">Дагестанские Огни (Республика Дагестан)</option>
+            <option class="dropdown-item" value="Радужный (Ханты-Мансийский автономный округ - Югра)">Радужный (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Далматово (Курганская область)">Далматово (Курганская область)</option>
+            <option class="dropdown-item" value="Райчихинск (Амурская область)">Райчихинск (Амурская область)</option>
+            <option class="dropdown-item" value="Дальнегорск (Приморский край)">Дальнегорск (Приморский край)</option>
+            <option class="dropdown-item" value="Раменское (Московская область)">Раменское (Московская область)</option>
+            <option class="dropdown-item" value="Дальнереченск (Приморский край)">Дальнереченск (Приморский край)</option>
+            <option class="dropdown-item" value="Рассказово (Тамбовская область)">Рассказово (Тамбовская область)</option>
+            <option class="dropdown-item" value="Данилов (Ярославская область)">Данилов (Ярославская область)</option>
+            <option class="dropdown-item" value="Ревда (Свердловская область)">Ревда (Свердловская область)</option>
+            <option class="dropdown-item" value="Данков (Липецкая область)">Данков (Липецкая область)</option>
+            <option class="dropdown-item" value="Реж (Свердловская область)">Реж (Свердловская область)</option>
+            <option class="dropdown-item" value="Дегтярск (Свердловская область)">Дегтярск (Свердловская область)</option>
+            <option class="dropdown-item" value="Реутов (Московская область)">Реутов (Московская область)</option>
+            <option class="dropdown-item" value="Дедовск (Московская область)">Дедовск (Московская область)</option>
+            <option class="dropdown-item" value="Ржев (Тверская область)">Ржев (Тверская область)</option>
+            <option class="dropdown-item" value="Демидов (Смоленская область)">Демидов (Смоленская область)</option>
+            <option class="dropdown-item" value="Родники (Ивановская область)">Родники (Ивановская область)</option>
+            <option class="dropdown-item" value="Дербент (Республика Дагестан)">Дербент (Республика Дагестан)</option>
+            <option class="dropdown-item" value="Рославль (Смоленская область)">Рославль (Смоленская область)</option>
+            <option class="dropdown-item" value="Десногорск (Смоленская область)">Десногорск (Смоленская область)</option>
+            <option class="dropdown-item" value="Россошь (Воронежская область)">Россошь (Воронежская область)</option>
+            <option class="dropdown-item" value="Джанкой (Республика Крым)">Джанкой (Республика Крым)</option>
+            <option class="dropdown-item" value="Ростов (Ярославская область)">Ростов (Ярославская область)</option>
+            <option class="dropdown-item" value="Дзержинск (Нижегородская область)">Дзержинск (Нижегородская область)</option>
+            <option class="dropdown-item" value="Ростов-на-Дону (Ростовская область)">Ростов-на-Дону (Ростовская область)</option>
+            <option class="dropdown-item" value="Дзержинский (Московская область)">Дзержинский (Московская область)</option>
+            <option class="dropdown-item" value="Рошаль (Московская область)">Рошаль (Московская область)</option>
+            <option class="dropdown-item" value="Дивногорск (Красноярский край)">Дивногорск (Красноярский край)</option>
+            <option class="dropdown-item" value="Ртищево (Саратовская область)">Ртищево (Саратовская область)</option>
+            <option class="dropdown-item" value="Дигора (Республика Северная Осетия - Алания)">Дигора (Республика Северная Осетия - Алания)</option>
+            <option class="dropdown-item" value="Рубцовск (Алтайский край)">Рубцовск (Алтайский край)</option>
+            <option class="dropdown-item" value="Димитровград (Ульяновская область)">Димитровград (Ульяновская область)</option>
+            <option class="dropdown-item" value="Рудня (Смоленская область)">Рудня (Смоленская область)</option>
+            <option class="dropdown-item" value="Дмитриев (Курская область)">Дмитриев (Курская область)</option>
+            <option class="dropdown-item" value="Руза (Московская область)">Руза (Московская область)</option>
+            <option class="dropdown-item" value="Дмитров (Московская область)">Дмитров (Московская область)</option>
+            <option class="dropdown-item" value="Рузаевка (Республика Мордовия)">Рузаевка (Республика Мордовия)</option>
+            <option class="dropdown-item" value="Дмитровск (Орловская область)">Дмитровск (Орловская область)</option>
+            <option class="dropdown-item" value="Рыбинск (Ярославская область)">Рыбинск (Ярославская область)</option>
+            <option class="dropdown-item" value="Дно (Псковская область)">Дно (Псковская область)</option>
+            <option class="dropdown-item" value="Рыбное (Рязанская область)">Рыбное (Рязанская область)</option>
+            <option class="dropdown-item" value="Добрянка (Пермский край)">Добрянка (Пермский край)</option>
+            <option class="dropdown-item" value="Рыльск (Курская область)">Рыльск (Курская область)</option>
+            <option class="dropdown-item" value="Долгопрудный (Московская область)">Долгопрудный (Московская область)</option>
+            <option class="dropdown-item" value="Ряжск (Рязанская область)">Ряжск (Рязанская область)</option>
+            <option class="dropdown-item" value="Долинск (Сахалинская область)">Долинск (Сахалинская область)</option>
+            <option class="dropdown-item" value="Рязань">Рязань</option>
+            <option class="dropdown-item" value="Домодедово (Московская область)">Домодедово (Московская область)</option>
+            <option class="dropdown-item" value="Саки (Республика Крым)">Саки (Республика Крым)</option>
+            <option class="dropdown-item" value="Донецк (Ростовская область)">Донецк (Ростовская область)</option>
+            <option class="dropdown-item" value="Салават (Республика Башкортостан)">Салават (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Донской (Тульская область)">Донской (Тульская область)</option>
+            <option class="dropdown-item" value="Салаир (Кемеровская область)">Салаир (Кемеровская область)</option>
+            <option class="dropdown-item" value="Дорогобуж (Смоленская область)">Дорогобуж (Смоленская область)</option>
+            <option class="dropdown-item" value="Салехард (Ямало-Ненецкий автономный округ)">Салехард (Ямало-Ненецкий автономный округ)</option>
+            <option class="dropdown-item" value="Дрезна (Московская область)">Дрезна (Московская область)</option>
+            <option class="dropdown-item" value="Сальск (Ростовская область)">Сальск (Ростовская область)</option>
+            <option class="dropdown-item" value="Дубна (Московская область)">Дубна (Московская область)</option>
+            <option class="dropdown-item" value="Самара">Самара</option>
+            <option class="dropdown-item" value="Дубовка (Волгоградская область)">Дубовка (Волгоградская область)</option>
+            <option class="dropdown-item" value="Санкт-Петербург">Санкт-Петербург</option>
+            <option class="dropdown-item" value="Дудинка (Красноярский край)">Дудинка (Красноярский край)</option>
+            <option class="dropdown-item" value="Саранск (Республика Мордовия)">Саранск (Республика Мордовия)</option>
+            <option class="dropdown-item" value="Духовщина (Смоленская область)">Духовщина (Смоленская область)</option>
+            <option class="dropdown-item" value="Сарапул (Удмуртская Республика)">Сарапул (Удмуртская Республика)</option>
+            <option class="dropdown-item" value="Дюртюли (Республика Башкортостан)">Дюртюли (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Саратов">Саратов</option>
+            <option class="dropdown-item" value="Дятьково (Брянская область)">Дятьково (Брянская область)</option>
+            <option class="dropdown-item" value="Саров (Нижегородская область)">Саров (Нижегородская область)</option>
+            <option class="dropdown-item" value="Евпатория (Республика Крым)">Евпатория (Республика Крым)</option>
+            <option class="dropdown-item" value="Сасово (Рязанская область)">Сасово (Рязанская область)</option>
+            <option class="dropdown-item" value="Егорьевск (Московская область)">Егорьевск (Московская область)</option>
+            <option class="dropdown-item" value="Сатка (Челябинская область)">Сатка (Челябинская область)</option>
+            <option class="dropdown-item" value="Ейск (Краснодарский край)">Ейск (Краснодарский край)</option>
+            <option class="dropdown-item" value="Сафоново (Смоленская область)">Сафоново (Смоленская область)</option>
+            <option class="dropdown-item" value="Екатеринбург (Свердловская область)">Екатеринбург (Свердловская область)</option>
+            <option class="dropdown-item" value="Саяногорск (Республика Хакасия)">Саяногорск (Республика Хакасия)</option>
+            <option class="dropdown-item" value="Елабуга (Республика Татарстан)">Елабуга (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Саянск (Иркутская область)">Саянск (Иркутская область)</option>
+            <option class="dropdown-item" value="Елец (Липецкая область)">Елец (Липецкая область)</option>
+            <option class="dropdown-item" value="Светлогорск (Калининградская область)">Светлогорск (Калининградская область)</option>
+            <option class="dropdown-item" value="Елизово (Камчатский край)">Елизово (Камчатский край)</option>
+            <option class="dropdown-item" value="Светлоград (Ставропольский край)">Светлоград (Ставропольский край)</option>
+            <option class="dropdown-item" value="Ельня (Смоленская область)">Ельня (Смоленская область)</option>
+            <option class="dropdown-item" value="Светлый (Калининградская область)">Светлый (Калининградская область)</option>
+            <option class="dropdown-item" value="Еманжелинск (Челябинская область)">Еманжелинск (Челябинская область)</option>
+            <option class="dropdown-item" value="Светогорск (Ленинградская область)">Светогорск (Ленинградская область)</option>
+            <option class="dropdown-item" value="Емва (Республика Коми)">Емва (Республика Коми)</option>
+            <option class="dropdown-item" value="Свирск (Иркутская область)">Свирск (Иркутская область)</option>
+            <option class="dropdown-item" value="Енисейск (Красноярский край)">Енисейск (Красноярский край)</option>
+            <option class="dropdown-item" value="Свободный (Амурская область)">Свободный (Амурская область)</option>
+            <option class="dropdown-item" value="Ермолино (Калужская область)">Ермолино (Калужская область)</option>
+            <option class="dropdown-item" value="Себеж (Псковская область)">Себеж (Псковская область)</option>
+            <option class="dropdown-item" value="Ершов (Саратовская область)">Ершов (Саратовская область)</option>
+            <option class="dropdown-item" value="Севастополь">Севастополь</option>
+            <option class="dropdown-item" value="Ессентуки (Ставропольский край)">Ессентуки (Ставропольский край)</option>
+            <option class="dropdown-item" value="Северо-Курильск (Сахалинская область)">Северо-Курильск (Сахалинская область)</option>
+            <option class="dropdown-item" value="Ефремов (Тульская область)">Ефремов (Тульская область)</option>
+            <option class="dropdown-item" value="Северобайкальск (Республика Бурятия)">Северобайкальск (Республика Бурятия)</option>
+            <option class="dropdown-item" value="Железноводск (Ставропольский край)">Железноводск (Ставропольский край)</option>
+            <option class="dropdown-item" value="Северодвинск (Архангельская область)">Северодвинск (Архангельская область)</option>
+            <option class="dropdown-item" value="Железногорск (Красноярский край)">Железногорск (Красноярский край)</option>
+            <option class="dropdown-item" value="Североморск (Мурманская область)">Североморск (Мурманская область)</option>
+            <option class="dropdown-item" value="Железногорск (Курская область)">Железногорск (Курская область)</option>
+            <option class="dropdown-item" value="Североуральск (Свердловская область)">Североуральск (Свердловская область)</option>
+            <option class="dropdown-item" value="Железногорск-Илимский (Иркутская область)">Железногорск-Илимский (Иркутская область)</option>
+            <option class="dropdown-item" value="Северск (Томская область)">Северск (Томская область)</option>
+            <option class="dropdown-item" value="Жердевка (Тамбовская область)">Жердевка (Тамбовская область)</option>
+            <option class="dropdown-item" value="Севск (Брянская область)">Севск (Брянская область)</option>
+            <option class="dropdown-item" value="Жигулёвск (Самарская область)">Жигулёвск (Самарская область)</option>
+            <option class="dropdown-item" value="Сегежа (Республика Карелия)">Сегежа (Республика Карелия)</option>
+            <option class="dropdown-item" value="Жиздра (Калужская область)">Жиздра (Калужская область)</option>
+            <option class="dropdown-item" value="Сельцо (Брянская область)">Сельцо (Брянская область)</option>
+            <option class="dropdown-item" value="Жирновск (Волгоградская область)">Жирновск (Волгоградская область)</option>
+            <option class="dropdown-item" value="Семёнов (Нижегородская область)">Семёнов (Нижегородская область)</option>
+            <option class="dropdown-item" value="Жуков (Калужская область)">Жуков (Калужская область)</option>
+            <option class="dropdown-item" value="Семикаракорск (Ростовская область)">Семикаракорск (Ростовская область)</option>
+            <option class="dropdown-item" value="Жуковка (Брянская область)">Жуковка (Брянская область)</option>
+            <option class="dropdown-item" value="Семилуки (Воронежская область)">Семилуки (Воронежская область)</option>
+            <option class="dropdown-item" value="Жуковский (Московская область)">Жуковский (Московская область)</option>
+            <option class="dropdown-item" value="Сенгилей (Ульяновская область)">Сенгилей (Ульяновская область)</option>
+            <option class="dropdown-item" value="Завитинск (Амурская область)">Завитинск (Амурская область)</option>
+            <option class="dropdown-item" value="Серафимович (Волгоградская область)">Серафимович (Волгоградская область)</option>
+            <option class="dropdown-item" value="Заводоуковск (Тюменская область)">Заводоуковск (Тюменская область)</option>
+            <option class="dropdown-item" value="Сергач (Нижегородская область)">Сергач (Нижегородская область)</option>
+            <option class="dropdown-item" value="Заволжск (Ивановская область)">Заволжск (Ивановская область)</option>
+            <option class="dropdown-item" value="Сергиев Посад (Московская область)">Сергиев Посад (Московская область)</option>
+            <option class="dropdown-item" value="Заволжье (Нижегородская область)">Заволжье (Нижегородская область)</option>
+            <option class="dropdown-item" value="Сердобск (Пензенская область)">Сердобск (Пензенская область)</option>
+            <option class="dropdown-item" value="Задонск (Липецкая область)">Задонск (Липецкая область)</option>
+            <option class="dropdown-item" value="Серов (Свердловская область)">Серов (Свердловская область)</option>
+            <option class="dropdown-item" value="Заинск (Республика Татарстан)">Заинск (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Серпухов (Московская область)">Серпухов (Московская область)</option>
+            <option class="dropdown-item" value="Закаменск (Республика Бурятия)">Закаменск (Республика Бурятия)</option>
+            <option class="dropdown-item" value="Сертолово (Ленинградская область)">Сертолово (Ленинградская область)</option>
+            <option class="dropdown-item" value="Заозёрный (Красноярский край)">Заозёрный (Красноярский край)</option>
+            <option class="dropdown-item" value="Сибай (Республика Башкортостан)">Сибай (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Заозёрск (Мурманская область)">Заозёрск (Мурманская область)</option>
+            <option class="dropdown-item" value="Сим (Челябинская область)">Сим (Челябинская область)</option>
+            <option class="dropdown-item" value="Западная Двина (Тверская область)">Западная Двина (Тверская область)</option>
+            <option class="dropdown-item" value="Симферополь (Республика Крым)">Симферополь (Республика Крым)</option>
+            <option class="dropdown-item" value="Заполярный (Мурманская область)">Заполярный (Мурманская область)</option>
+            <option class="dropdown-item" value="Сковородино (Амурская область)">Сковородино (Амурская область)</option>
+            <option class="dropdown-item" value="Зарайск (Московская область)">Зарайск (Московская область)</option>
+            <option class="dropdown-item" value="Скопин (Рязанская область)">Скопин (Рязанская область)</option>
+            <option class="dropdown-item" value="Заречный (Пензенская область)">Заречный (Пензенская область)</option>
+            <option class="dropdown-item" value="Славгород (Алтайский край)">Славгород (Алтайский край)</option>
+            <option class="dropdown-item" value="Заречный (Свердловская область)">Заречный (Свердловская область)</option>
+            <option class="dropdown-item" value="Славск (Калининградская область)">Славск (Калининградская область)</option>
+            <option class="dropdown-item" value="Заринск (Алтайский край)">Заринск (Алтайский край)</option>
+            <option class="dropdown-item" value="Славянск-на-Кубани (Краснодарский край)">Славянск-на-Кубани (Краснодарский край)</option>
+            <option class="dropdown-item" value="Звенигово (Республика Марий Эл)">Звенигово (Республика Марий Эл)</option>
+            <option class="dropdown-item" value="Сланцы (Ленинградская область)">Сланцы (Ленинградская область)</option>
+            <option class="dropdown-item" value="Звенигород (Московская область)">Звенигород (Московская область)</option>
+            <option class="dropdown-item" value="Слободской (Кировская область)">Слободской (Кировская область)</option>
+            <option class="dropdown-item" value="Зверево (Ростовская область)">Зверево (Ростовская область)</option>
+            <option class="dropdown-item" value="Слюдянка (Иркутская область)">Слюдянка (Иркутская область)</option>
+            <option class="dropdown-item" value="Зеленогорск (Красноярский край)">Зеленогорск (Красноярский край)</option>
+            <option class="dropdown-item" value="Смоленск">Смоленск</option>
+            <option class="dropdown-item" value="Зеленоградск (Калининградская область)">Зеленоградск (Калининградская область)</option>
+            <option class="dropdown-item" value="Снежинск (Челябинская область)">Снежинск (Челябинская область)</option>
+            <option class="dropdown-item" value="Зеленодольск (Республика Татарстан)">Зеленодольск (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Снежногорск (Мурманская область)">Снежногорск (Мурманская область)</option>
+            <option class="dropdown-item" value="Зеленокумск (Ставропольский край)">Зеленокумск (Ставропольский край)</option>
+            <option class="dropdown-item" value="Собинка (Владимирская область)">Собинка (Владимирская область)</option>
+            <option class="dropdown-item" value="Зерноград (Ростовская область)">Зерноград (Ростовская область)</option>
+            <option class="dropdown-item" value="Советск (Калининградская область)">Советск (Калининградская область)</option>
+            <option class="dropdown-item" value="Зея (Амурская область)">Зея (Амурская область)</option>
+            <option class="dropdown-item" value="Советск (Кировская область)">Советск (Кировская область)</option>
+            <option class="dropdown-item" value="Зима (Иркутская область)">Зима (Иркутская область)</option>
+            <option class="dropdown-item" value="Советск (Тульская область)">Советск (Тульская область)</option>
+            <option class="dropdown-item" value="Златоуст (Челябинская область)">Златоуст (Челябинская область)</option>
+            <option class="dropdown-item" value="Советская Гавань (Хабаровский край)">Советская Гавань (Хабаровский край)</option>
+            <option class="dropdown-item" value="Злынка (Брянская область)">Злынка (Брянская область)</option>
+            <option class="dropdown-item" value="Советский (Ханты-Мансийский автономный округ - Югра)">Советский (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Змеиногорск (Алтайский край)">Змеиногорск (Алтайский край)</option>
+            <option class="dropdown-item" value="Сокол (Вологодская область)">Сокол (Вологодская область)</option>
+            <option class="dropdown-item" value="Знаменск (Астраханская область)">Знаменск (Астраханская область)</option>
+            <option class="dropdown-item" value="Солигалич (Костромская область)">Солигалич (Костромская область)</option>
+            <option class="dropdown-item" value="Зубцов (Тверская область)">Зубцов (Тверская область)</option>
+            <option class="dropdown-item" value="Соликамск (Пермский край)">Соликамск (Пермский край)</option>
+            <option class="dropdown-item" value="Зуевка (Кировская область)">Зуевка (Кировская область)</option>
+            <option class="dropdown-item" value="Солнечногорск (Московская область)">Солнечногорск (Московская область)</option>
+            <option class="dropdown-item" value="Ивангород (Ленинградская область)">Ивангород (Ленинградская область)</option>
+            <option class="dropdown-item" value="Соль-Илецк (Оренбургская область)">Соль-Илецк (Оренбургская область)</option>
+            <option class="dropdown-item" value="Иваново">Иваново</option>
+            <option class="dropdown-item" value="Сольвычегодск (Архангельская область)">Сольвычегодск (Архангельская область)</option>
+            <option class="dropdown-item" value="Ивантеевка (Московская область)">Ивантеевка (Московская область)</option>
+            <option class="dropdown-item" value="Сольцы (Новгородская область)">Сольцы (Новгородская область)</option>
+            <option class="dropdown-item" value="Ивдель (Свердловская область)">Ивдель (Свердловская область)</option>
+            <option class="dropdown-item" value="Сорочинск (Оренбургская область)">Сорочинск (Оренбургская область)</option>
+            <option class="dropdown-item" value="Игарка (Красноярский край)">Игарка (Красноярский край)</option>
+            <option class="dropdown-item" value="Сорск (Республика Хакасия)">Сорск (Республика Хакасия)</option>
+            <option class="dropdown-item" value="Ижевск (Удмуртская Республика)">Ижевск (Удмуртская Республика)</option>
+            <option class="dropdown-item" value="Сортавала (Республика Карелия)">Сортавала (Республика Карелия)</option>
+            <option class="dropdown-item" value="Избербаш (Республика Дагестан)">Избербаш (Республика Дагестан)</option>
+            <option class="dropdown-item" value="Сосенский (Калужская область)">Сосенский (Калужская область)</option>
+            <option class="dropdown-item" value="Изобильный (Ставропольский край)">Изобильный (Ставропольский край)</option>
+            <option class="dropdown-item" value="Сосновка (Кировская область)">Сосновка (Кировская область)</option>
+            <option class="dropdown-item" value="Иланский (Красноярский край)">Иланский (Красноярский край)</option>
+            <option class="dropdown-item" value="Сосновоборск (Красноярский край)">Сосновоборск (Красноярский край)</option>
+            <option class="dropdown-item" value="Инза (Ульяновская область)">Инза (Ульяновская область)</option>
+            <option class="dropdown-item" value="Сосновый Бор (Ленинградская область)">Сосновый Бор (Ленинградская область)</option>
+            <option class="dropdown-item" value="Иннополис (Республика Татарстан)">Иннополис (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Сосногорск (Республика Коми)">Сосногорск (Республика Коми)</option>
+            <option class="dropdown-item" value="Инсар (Республика Мордовия)">Инсар (Республика Мордовия)</option>
+            <option class="dropdown-item" value="Сочи (Краснодарский край)">Сочи (Краснодарский край)</option>
+            <option class="dropdown-item" value="Инта (Республика Коми)">Инта (Республика Коми)</option>
+            <option class="dropdown-item" value="Спас-Деменск (Калужская область)">Спас-Деменск (Калужская область)</option>
+            <option class="dropdown-item" value="Ипатово (Ставропольский край)">Ипатово (Ставропольский край)</option>
+            <option class="dropdown-item" value="Спас-Клепики (Рязанская область)">Спас-Клепики (Рязанская область)</option>
+            <option class="dropdown-item" value="Ирбит (Свердловская область)">Ирбит (Свердловская область)</option>
+            <option class="dropdown-item" value="Спасск (Пензенская область)">Спасск (Пензенская область)</option>
+            <option class="dropdown-item" value="Иркутск">Иркутск</option>
+            <option class="dropdown-item" value="Спасск-Дальний (Приморский край)">Спасск-Дальний (Приморский край)</option>
+            <option class="dropdown-item" value="Исилькуль (Омская область)">Исилькуль (Омская область)</option>
+            <option class="dropdown-item" value="Спасск-Рязанский (Рязанская область)">Спасск-Рязанский (Рязанская область)</option>
+            <option class="dropdown-item" value="Искитим (Новосибирская область)">Искитим (Новосибирская область)</option>
+            <option class="dropdown-item" value="Среднеколымск (Республика Саха (Якутия))">Среднеколымск (Республика Саха (Якутия))</option>
+            <option class="dropdown-item" value="Истра (Московская область)">Истра (Московская область)</option>
+            <option class="dropdown-item" value="Среднеуральск (Свердловская область)">Среднеуральск (Свердловская область)</option>
+            <option class="dropdown-item" value="Ишим (Тюменская область)">Ишим (Тюменская область)</option>
+            <option class="dropdown-item" value="Сретенск (Забайкальский край)">Сретенск (Забайкальский край)</option>
+            <option class="dropdown-item" value="Ишимбай (Республика Башкортостан)">Ишимбай (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Ставрополь (Ставропольский край)">Ставрополь (Ставропольский край)</option>
+            <option class="dropdown-item" value="Йошкар-Ола (Республика Марий Эл)">Йошкар-Ола (Республика Марий Эл)</option>
+            <option class="dropdown-item" value="Старая Купавна (Московская область)">Старая Купавна (Московская область)</option>
+            <option class="dropdown-item" value="Кадников (Вологодская область)">Кадников (Вологодская область)</option>
+            <option class="dropdown-item" value="Старая Русса (Новгородская область)">Старая Русса (Новгородская область)</option>
+            <option class="dropdown-item" value="Казань (Республика Татарстан)">Казань (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Старица (Тверская область)">Старица (Тверская область)</option>
+            <option class="dropdown-item" value="Калач (Воронежская область)">Калач (Воронежская область)</option>
+            <option class="dropdown-item" value="Стародуб (Брянская область)">Стародуб (Брянская область)</option>
+            <option class="dropdown-item" value="Калач-на-Дону (Волгоградская область)">Калач-на-Дону (Волгоградская область)</option>
+            <option class="dropdown-item" value="Старый Крым (Республика Крым)">Старый Крым (Республика Крым)</option>
+            <option class="dropdown-item" value="Калачинск (Омская область)">Калачинск (Омская область)</option>
+            <option class="dropdown-item" value="Старый Оскол (Белгородская область)">Старый Оскол (Белгородская область)</option>
+            <option class="dropdown-item" value="Калининград">Калининград</option>
+            <option class="dropdown-item" value="Стерлитамак (Республика Башкортостан)">Стерлитамак (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Калининск (Саратовская область)">Калининск (Саратовская область)</option>
+            <option class="dropdown-item" value="Стрежевой (Томская область)">Стрежевой (Томская область)</option>
+            <option class="dropdown-item" value="Калтан (Кемеровская область)">Калтан (Кемеровская область)</option>
+            <option class="dropdown-item" value="Строитель (Белгородская область)">Строитель (Белгородская область)</option>
+            <option class="dropdown-item" value="Калуга">Калуга</option>
+            <option class="dropdown-item" value="Струнино (Владимирская область)">Струнино (Владимирская область)</option>
+            <option class="dropdown-item" value="Калязин (Тверская область)">Калязин (Тверская область)</option>
+            <option class="dropdown-item" value="Ступино (Московская область)">Ступино (Московская область)</option>
+            <option class="dropdown-item" value="Камбарка (Удмуртская Республика)">Камбарка (Удмуртская Республика)</option>
+            <option class="dropdown-item" value="Суворов (Тульская область)">Суворов (Тульская область)</option>
+            <option class="dropdown-item" value="Каменка (Пензенская область)">Каменка (Пензенская область)</option>
+            <option class="dropdown-item" value="Судак (Республика Крым)">Судак (Республика Крым)</option>
+            <option class="dropdown-item" value="Каменногорск (Ленинградская область)">Каменногорск (Ленинградская область)</option>
+            <option class="dropdown-item" value="Суджа (Курская область)">Суджа (Курская область)</option>
+            <option class="dropdown-item" value="Каменск-Уральский (Свердловская область)">Каменск-Уральский (Свердловская область)</option>
+            <option class="dropdown-item" value="Судогда (Владимирская область)">Судогда (Владимирская область)</option>
+            <option class="dropdown-item" value="Каменск-Шахтинский (Ростовская область)">Каменск-Шахтинский (Ростовская область)</option>
+            <option class="dropdown-item" value="Суздаль (Владимирская область)">Суздаль (Владимирская область)</option>
+            <option class="dropdown-item" value="Камень-на-Оби (Алтайский край)">Камень-на-Оби (Алтайский край)</option>
+            <option class="dropdown-item" value="Сунжа (Республика Ингушетия)">Сунжа (Республика Ингушетия)</option>
+            <option class="dropdown-item" value="Камешково (Владимирская область)">Камешково (Владимирская область)</option>
+            <option class="dropdown-item" value="Суоярви (Республика Карелия)">Суоярви (Республика Карелия)</option>
+            <option class="dropdown-item" value="Камызяк (Астраханская область)">Камызяк (Астраханская область)</option>
+            <option class="dropdown-item" value="Сураж (Брянская область)">Сураж (Брянская область)</option>
+            <option class="dropdown-item" value="Камышин (Волгоградская область)">Камышин (Волгоградская область)</option>
+            <option class="dropdown-item" value="Сургут (Ханты-Мансийский автономный округ - Югра)">Сургут (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Камышлов (Свердловская область)">Камышлов (Свердловская область)</option>
+            <option class="dropdown-item" value="Суровикино (Волгоградская область)">Суровикино (Волгоградская область)</option>
+            <option class="dropdown-item" value="Канаш (Чувашская Республика - Чувашия)">Канаш (Чувашская Республика - Чувашия)</option>
+            <option class="dropdown-item" value="Сурск (Пензенская область)">Сурск (Пензенская область)</option>
+            <option class="dropdown-item" value="Кандалакша (Мурманская область)">Кандалакша (Мурманская область)</option>
+            <option class="dropdown-item" value="Сусуман (Магаданская область)">Сусуман (Магаданская область)</option>
+            <option class="dropdown-item" value="Канск (Красноярский край)">Канск (Красноярский край)</option>
+            <option class="dropdown-item" value="Сухиничи (Калужская область)">Сухиничи (Калужская область)</option>
+            <option class="dropdown-item" value="Карабаново (Владимирская область)">Карабаново (Владимирская область)</option>
+            <option class="dropdown-item" value="Сухой Лог (Свердловская область)">Сухой Лог (Свердловская область)</option>
+            <option class="dropdown-item" value="Карабаш (Челябинская область)">Карабаш (Челябинская область)</option>
+            <option class="dropdown-item" value="Сызрань (Самарская область)">Сызрань (Самарская область)</option>
+            <option class="dropdown-item" value="Карабулак (Республика Ингушетия)">Карабулак (Республика Ингушетия)</option>
+            <option class="dropdown-item" value="Сыктывкар (Республика Коми)">Сыктывкар (Республика Коми)</option>
+            <option class="dropdown-item" value="Карасук (Новосибирская область)">Карасук (Новосибирская область)</option>
+            <option class="dropdown-item" value="Сысерть (Свердловская область)">Сысерть (Свердловская область)</option>
+            <option class="dropdown-item" value="Карачаевск (Карачаево-Черкесская Республика)">Карачаевск (Карачаево-Черкесская Республика)</option>
+            <option class="dropdown-item" value="Сычёвка (Смоленская область)">Сычёвка (Смоленская область)</option>
+            <option class="dropdown-item" value="Карачев (Брянская область)">Карачев (Брянская область)</option>
+            <option class="dropdown-item" value="Сясьстрой (Ленинградская область)">Сясьстрой (Ленинградская область)</option>
+            <option class="dropdown-item" value="Каргат (Новосибирская область)">Каргат (Новосибирская область)</option>
+            <option class="dropdown-item" value="Тавда (Свердловская область)">Тавда (Свердловская область)</option>
+            <option class="dropdown-item" value="Каргополь (Архангельская область)">Каргополь (Архангельская область)</option>
+            <option class="dropdown-item" value="Таганрог (Ростовская область)">Таганрог (Ростовская область)</option>
+            <option class="dropdown-item" value="Карпинск (Свердловская область)">Карпинск (Свердловская область)</option>
+            <option class="dropdown-item" value="Тайга (Кемеровская область)">Тайга (Кемеровская область)</option>
+            <option class="dropdown-item" value="Карталы (Челябинская область)">Карталы (Челябинская область)</option>
+            <option class="dropdown-item" value="Тайшет (Иркутская область)">Тайшет (Иркутская область)</option>
+            <option class="dropdown-item" value="Касимов (Рязанская область)">Касимов (Рязанская область)</option>
+            <option class="dropdown-item" value="Талдом (Московская область)">Талдом (Московская область)</option>
+            <option class="dropdown-item" value="Касли (Челябинская область)">Касли (Челябинская область)</option>
+            <option class="dropdown-item" value="Талица (Свердловская область)">Талица (Свердловская область)</option>
+            <option class="dropdown-item" value="Каспийск (Республика Дагестан)">Каспийск (Республика Дагестан)</option>
+            <option class="dropdown-item" value="Тамбов">Тамбов</option>
+            <option class="dropdown-item" value="Катав-Ивановск (Челябинская область)">Катав-Ивановск (Челябинская область)</option>
+            <option class="dropdown-item" value="Тара (Омская область)">Тара (Омская область)</option>
+            <option class="dropdown-item" value="Катайск (Курганская область)">Катайск (Курганская область)</option>
+            <option class="dropdown-item" value="Тарко-Сале (Ямало-Ненецкий автономный округ)">Тарко-Сале (Ямало-Ненецкий автономный округ)</option>
+            <option class="dropdown-item" value="Качканар (Свердловская область)">Качканар (Свердловская область)</option>
+            <option class="dropdown-item" value="Таруса (Калужская область)">Таруса (Калужская область)</option>
+            <option class="dropdown-item" value="Кашин (Тверская область)">Кашин (Тверская область)</option>
+            <option class="dropdown-item" value="Татарск (Новосибирская область)">Татарск (Новосибирская область)</option>
+            <option class="dropdown-item" value="Кашира (Московская область)">Кашира (Московская область)</option>
+            <option class="dropdown-item" value="Таштагол (Кемеровская область)">Таштагол (Кемеровская область)</option>
+            <option class="dropdown-item" value="Кедровый (Томская область)">Кедровый (Томская область)</option>
+            <option class="dropdown-item" value="Тверь">Тверь</option>
+            <option class="dropdown-item" value="Кемерово">Кемерово</option>
+            <option class="dropdown-item" value="Теберда (Карачаево-Черкесская Республика)">Теберда (Карачаево-Черкесская Республика)</option>
+            <option class="dropdown-item" value="Кемь (Республика Карелия)">Кемь (Республика Карелия)</option>
+            <option class="dropdown-item" value="Тейково (Ивановская область)">Тейково (Ивановская область)</option>
+            <option class="dropdown-item" value="Керчь (Республика Крым)">Керчь (Республика Крым)</option>
+            <option class="dropdown-item" value="Темников (Республика Мордовия)">Темников (Республика Мордовия)</option>
+            <option class="dropdown-item" value="Кизел (Пермский край)">Кизел (Пермский край)</option>
+            <option class="dropdown-item" value="Темрюк (Краснодарский край)">Темрюк (Краснодарский край)</option>
+            <option class="dropdown-item" value="Кизилюрт (Республика Дагестан)">Кизилюрт (Республика Дагестан)</option>
+            <option class="dropdown-item" value="Терек (Кабардино-Балкарская Республика)">Терек (Кабардино-Балкарская Республика)</option>
+            <option class="dropdown-item" value="Кизляр (Республика Дагестан)">Кизляр (Республика Дагестан)</option>
+            <option class="dropdown-item" value="Тетюши (Республика Татарстан)">Тетюши (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Кимовск (Тульская область)">Кимовск (Тульская область)</option>
+            <option class="dropdown-item" value="Тимашевск (Краснодарский край)">Тимашевск (Краснодарский край)</option>
+            <option class="dropdown-item" value="Кимры (Тверская область)">Кимры (Тверская область)</option>
+            <option class="dropdown-item" value="Тихвин (Ленинградская область)">Тихвин (Ленинградская область)</option>
+            <option class="dropdown-item" value="Кингисепп (Ленинградская область)">Кингисепп (Ленинградская область)</option>
+            <option class="dropdown-item" value="Тихорецк (Краснодарский край)">Тихорецк (Краснодарский край)</option>
+            <option class="dropdown-item" value="Кинель (Самарская область)">Кинель (Самарская область)</option>
+            <option class="dropdown-item" value="Тобольск (Тюменская область)">Тобольск (Тюменская область)</option>
+            <option class="dropdown-item" value="Кинешма (Ивановская область)">Кинешма (Ивановская область)</option>
+            <option class="dropdown-item" value="Тогучин (Новосибирская область)">Тогучин (Новосибирская область)</option>
+            <option class="dropdown-item" value="Киреевск (Тульская область)">Киреевск (Тульская область)</option>
+            <option class="dropdown-item" value="Тольятти (Самарская область)">Тольятти (Самарская область)</option>
+            <option class="dropdown-item" value="Киренск (Иркутская область)">Киренск (Иркутская область)</option>
+            <option class="dropdown-item" value="Томари (Сахалинская область)">Томари (Сахалинская область)</option>
+            <option class="dropdown-item" value="Киржач (Владимирская область)">Киржач (Владимирская область)</option>
+            <option class="dropdown-item" value="Томмот (Республика Саха (Якутия))">Томмот (Республика Саха (Якутия))</option>
+            <option class="dropdown-item" value="Кириллов (Вологодская область)">Кириллов (Вологодская область)</option>
+            <option class="dropdown-item" value="Томск">Томск</option>
+            <option class="dropdown-item" value="Кириши (Ленинградская область)">Кириши (Ленинградская область)</option>
+            <option class="dropdown-item" value="Топки (Кемеровская область)">Топки (Кемеровская область)</option>
+            <option class="dropdown-item" value="Киров">Киров</option>
+            <option class="dropdown-item" value="Торжок (Тверская область)">Торжок (Тверская область)</option>
+            <option class="dropdown-item" value="Киров (Калужская область)">Киров (Калужская область)</option>
+            <option class="dropdown-item" value="Торопец (Тверская область)">Торопец (Тверская область)</option>
+            <option class="dropdown-item" value="Кировград (Свердловская область)">Кировград (Свердловская область)</option>
+            <option class="dropdown-item" value="Тосно (Ленинградская область)">Тосно (Ленинградская область)</option>
+            <option class="dropdown-item" value="Кирово-Чепецк (Кировская область)">Кирово-Чепецк (Кировская область)</option>
+            <option class="dropdown-item" value="Тотьма (Вологодская область)">Тотьма (Вологодская область)</option>
+            <option class="dropdown-item" value="Кировск (Ленинградская область)">Кировск (Ленинградская область)</option>
+            <option class="dropdown-item" value="Трёхгорный (Челябинская область)">Трёхгорный (Челябинская область)</option>
+            <option class="dropdown-item" value="Кировск (Мурманская область)">Кировск (Мурманская область)</option>
+            <option class="dropdown-item" value="Троицк (Челябинская область)">Троицк (Челябинская область)</option>
+            <option class="dropdown-item" value="Кирс (Кировская область)">Кирс (Кировская область)</option>
+            <option class="dropdown-item" value="Трубчевск (Брянская область)">Трубчевск (Брянская область)</option>
+            <option class="dropdown-item" value="Кирсанов (Тамбовская область)">Кирсанов (Тамбовская область)</option>
+            <option class="dropdown-item" value="Туапсе (Краснодарский край)">Туапсе (Краснодарский край)</option>
+            <option class="dropdown-item" value="Киселёвск (Кемеровская область)">Киселёвск (Кемеровская область)</option>
+            <option class="dropdown-item" value="Туймазы (Республика Башкортостан)">Туймазы (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Кисловодск (Ставропольский край)">Кисловодск (Ставропольский край)</option>
+            <option class="dropdown-item" value="Тула">Тула</option>
+            <option class="dropdown-item" value="Клин (Московская область)">Клин (Московская область)</option>
+            <option class="dropdown-item" value="Тулун (Иркутская область)">Тулун (Иркутская область)</option>
+            <option class="dropdown-item" value="Клинцы (Брянская область)">Клинцы (Брянская область)</option>
+            <option class="dropdown-item" value="Туран (Республика Тыва)">Туран (Республика Тыва)</option>
+            <option class="dropdown-item" value="Княгинино (Нижегородская область)">Княгинино (Нижегородская область)</option>
+            <option class="dropdown-item" value="Туринск (Свердловская область)">Туринск (Свердловская область)</option>
+            <option class="dropdown-item" value="Ковдор (Мурманская область)">Ковдор (Мурманская область)</option>
+            <option class="dropdown-item" value="Тутаев (Ярославская область)">Тутаев (Ярославская область)</option>
+            <option class="dropdown-item" value="Ковров (Владимирская область)">Ковров (Владимирская область)</option>
+            <option class="dropdown-item" value="Тында (Амурская область)">Тында (Амурская область)</option>
+            <option class="dropdown-item" value="Ковылкино (Республика Мордовия)">Ковылкино (Республика Мордовия)</option>
+            <option class="dropdown-item" value="Тырныауз (Кабардино-Балкарская Республика)">Тырныауз (Кабардино-Балкарская Республика)</option>
+            <option class="dropdown-item" value="Когалым (Ханты-Мансийский автономный округ - Югра)">Когалым (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Тюкалинск (Омская область)">Тюкалинск (Омская область)</option>
+            <option class="dropdown-item" value="Кодинск (Красноярский край)">Кодинск (Красноярский край)</option>
+            <option class="dropdown-item" value="Тюмень">Тюмень</option>
+            <option class="dropdown-item" value="Козельск (Калужская область)">Козельск (Калужская область)</option>
+            <option class="dropdown-item" value="Уварово (Тамбовская область)">Уварово (Тамбовская область)</option>
+            <option class="dropdown-item" value="Козловка (Чувашская Республика - Чувашия)">Козловка (Чувашская Республика - Чувашия)</option>
+            <option class="dropdown-item" value="Углегорск (Сахалинская область)">Углегорск (Сахалинская область)</option>
+            <option class="dropdown-item" value="Козьмодемьянск (Республика Марий Эл)">Козьмодемьянск (Республика Марий Эл)</option>
+            <option class="dropdown-item" value="Углич (Ярославская область)">Углич (Ярославская область)</option>
+            <option class="dropdown-item" value="Кола (Мурманская область)">Кола (Мурманская область)</option>
+            <option class="dropdown-item" value="Удачный (Республика Саха (Якутия))">Удачный (Республика Саха (Якутия))</option>
+            <option class="dropdown-item" value="Кологрив (Костромская область)">Кологрив (Костромская область)</option>
+            <option class="dropdown-item" value="Удомля (Тверская область)">Удомля (Тверская область)</option>
+            <option class="dropdown-item" value="Коломна (Московская область)">Коломна (Московская область)</option>
+            <option class="dropdown-item" value="Ужур (Красноярский край)">Ужур (Красноярский край)</option>
+            <option class="dropdown-item" value="Колпашево (Томская область)">Колпашево (Томская область)</option>
+            <option class="dropdown-item" value="Узловая (Тульская область)">Узловая (Тульская область)</option>
+            <option class="dropdown-item" value="Кольчугино (Владимирская область)">Кольчугино (Владимирская область)</option>
+            <option class="dropdown-item" value="Улан-Удэ (Республика Бурятия)">Улан-Удэ (Республика Бурятия)</option>
+            <option class="dropdown-item" value="Коммунар (Ленинградская область)">Коммунар (Ленинградская область)</option>
+            <option class="dropdown-item" value="Ульяновск">Ульяновск</option>
+            <option class="dropdown-item" value="Комсомольск (Ивановская область)">Комсомольск (Ивановская область)</option>
+            <option class="dropdown-item" value="Унеча (Брянская область)">Унеча (Брянская область)</option>
+            <option class="dropdown-item" value="Комсомольск-на-Амуре (Хабаровский край)">Комсомольск-на-Амуре (Хабаровский край)</option>
+            <option class="dropdown-item" value="Урай (Ханты-Мансийский автономный округ - Югра)">Урай (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Конаково (Тверская область)">Конаково (Тверская область)</option>
+            <option class="dropdown-item" value="Урень (Нижегородская область)">Урень (Нижегородская область)</option>
+            <option class="dropdown-item" value="Кондопога (Республика Карелия)">Кондопога (Республика Карелия)</option>
+            <option class="dropdown-item" value="Уржум (Кировская область)">Уржум (Кировская область)</option>
+            <option class="dropdown-item" value="Кондрово (Калужская область)">Кондрово (Калужская область)</option>
+            <option class="dropdown-item" value="Урус-Мартан (Чеченская Республика)">Урус-Мартан (Чеченская Республика)</option>
+            <option class="dropdown-item" value="Константиновск (Ростовская область)">Константиновск (Ростовская область)</option>
+            <option class="dropdown-item" value="Урюпинск (Волгоградская область)">Урюпинск (Волгоградская область)</option>
+            <option class="dropdown-item" value="Копейск (Челябинская область)">Копейск (Челябинская область)</option>
+            <option class="dropdown-item" value="Усинск (Республика Коми)">Усинск (Республика Коми)</option>
+            <option class="dropdown-item" value="Кораблино (Рязанская область)">Кораблино (Рязанская область)</option>
+            <option class="dropdown-item" value="Усмань (Липецкая область)">Усмань (Липецкая область)</option>
+            <option class="dropdown-item" value="Кореновск (Краснодарский край)">Кореновск (Краснодарский край)</option>
+            <option class="dropdown-item" value="Усолье (Пермский край)">Усолье (Пермский край)</option>
+            <option class="dropdown-item" value="Коркино (Челябинская область)">Коркино (Челябинская область)</option>
+            <option class="dropdown-item" value="Усолье-Сибирское (Иркутская область)">Усолье-Сибирское (Иркутская область)</option>
+            <option class="dropdown-item" value="Королёв (Московская область)">Королёв (Московская область)</option>
+            <option class="dropdown-item" value="Уссурийск (Приморский край)">Уссурийск (Приморский край)</option>
+            <option class="dropdown-item" value="Короча (Белгородская область)">Короча (Белгородская область)</option>
+            <option class="dropdown-item" value="Усть-Джегута (Карачаево-Черкесская Республика)">Усть-Джегута (Карачаево-Черкесская Республика)</option>
+            <option class="dropdown-item" value="Корсаков (Сахалинская область)">Корсаков (Сахалинская область)</option>
+            <option class="dropdown-item" value="Усть-Илимск (Иркутская область)">Усть-Илимск (Иркутская область)</option>
+            <option class="dropdown-item" value="Коряжма (Архангельская область)">Коряжма (Архангельская область)</option>
+            <option class="dropdown-item" value="Усть-Катав (Челябинская область)">Усть-Катав (Челябинская область)</option>
+            <option class="dropdown-item" value="Костерёво (Владимирская область)">Костерёво (Владимирская область)</option>
+            <option class="dropdown-item" value="Усть-Кут (Иркутская область)">Усть-Кут (Иркутская область)</option>
+            <option class="dropdown-item" value="Костомукша (Республика Карелия)">Костомукша (Республика Карелия)</option>
+            <option class="dropdown-item" value="Усть-Лабинск (Краснодарский край)">Усть-Лабинск (Краснодарский край)</option>
+            <option class="dropdown-item" value="Кострома">Кострома</option>
+            <option class="dropdown-item" value="Устюжна (Вологодская область)">Устюжна (Вологодская область)</option>
+            <option class="dropdown-item" value="Котельники (Московская область)">Котельники (Московская область)</option>
+            <option class="dropdown-item" value="Уфа (Республика Башкортостан)">Уфа (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Котельниково (Волгоградская область)">Котельниково (Волгоградская область)</option>
+            <option class="dropdown-item" value="Ухта (Республика Коми)">Ухта (Республика Коми)</option>
+            <option class="dropdown-item" value="Котельнич (Кировская область)">Котельнич (Кировская область)</option>
+            <option class="dropdown-item" value="Учалы (Республика Башкортостан)">Учалы (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Котлас (Архангельская область)">Котлас (Архангельская область)</option>
+            <option class="dropdown-item" value="Уяр (Красноярский край)">Уяр (Красноярский край)</option>
+            <option class="dropdown-item" value="Котово (Волгоградская область)">Котово (Волгоградская область)</option>
+            <option class="dropdown-item" value="Фатеж (Курская область)">Фатеж (Курская область)</option>
+            <option class="dropdown-item" value="Котовск (Тамбовская область)">Котовск (Тамбовская область)</option>
+            <option class="dropdown-item" value="Феодосия (Республика Крым)">Феодосия (Республика Крым)</option>
+            <option class="dropdown-item" value="Кохма (Ивановская область)">Кохма (Ивановская область)</option>
+            <option class="dropdown-item" value="Фокино (Брянская область)">Фокино (Брянская область)</option>
+            <option class="dropdown-item" value="Красавино (Вологодская область)">Красавино (Вологодская область)</option>
+            <option class="dropdown-item" value="Фокино (Приморский край)">Фокино (Приморский край)</option>
+            <option class="dropdown-item" value="Красноармейск (Московская область)">Красноармейск (Московская область)</option>
+            <option class="dropdown-item" value="Фролово (Волгоградская область)">Фролово (Волгоградская область)</option>
+            <option class="dropdown-item" value="Красноармейск (Саратовская область)">Красноармейск (Саратовская область)</option>
+            <option class="dropdown-item" value="Фрязино (Московская область)">Фрязино (Московская область)</option>
+            <option class="dropdown-item" value="Красновишерск (Пермский край)">Красновишерск (Пермский край)</option>
+            <option class="dropdown-item" value="Фурманов (Ивановская область)">Фурманов (Ивановская область)</option>
+            <option class="dropdown-item" value="Красногорск (Московская область)">Красногорск (Московская область)</option>
+            <option class="dropdown-item" value="Хабаровск (Хабаровский край)">Хабаровск (Хабаровский край)</option>
+            <option class="dropdown-item" value="Краснодар (Краснодарский край)">Краснодар (Краснодарский край)</option>
+            <option class="dropdown-item" value="Хадыженск (Краснодарский край)">Хадыженск (Краснодарский край)</option>
+            <option class="dropdown-item" value="Краснозаводск (Московская область)">Краснозаводск (Московская область)</option>
+            <option class="dropdown-item" value="Ханты-Мансийск (Ханты-Мансийский автономный округ - Югра)">Ханты-Мансийск (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Краснознаменск (Калининградская область)">Краснознаменск (Калининградская область)</option>
+            <option class="dropdown-item" value="Харабали (Астраханская область)">Харабали (Астраханская область)</option>
+            <option class="dropdown-item" value="Краснознаменск (Московская область)">Краснознаменск (Московская область)</option>
+            <option class="dropdown-item" value="Харовск (Вологодская область)">Харовск (Вологодская область)</option>
+            <option class="dropdown-item" value="Краснокаменск (Забайкальский край)">Краснокаменск (Забайкальский край)</option>
+            <option class="dropdown-item" value="Хасавюрт (Республика Дагестан)">Хасавюрт (Республика Дагестан)</option>
+            <option class="dropdown-item" value="Краснокамск (Пермский край)">Краснокамск (Пермский край)</option>
+            <option class="dropdown-item" value="Хвалынск (Саратовская область)">Хвалынск (Саратовская область)</option>
+            <option class="dropdown-item" value="Красноперекопск (Республика Крым)">Красноперекопск (Республика Крым)</option>
+            <option class="dropdown-item" value="Хилок (Забайкальский край)">Хилок (Забайкальский край)</option>
+            <option class="dropdown-item" value="Краснослободск (Волгоградская область)">Краснослободск (Волгоградская область)</option>
+            <option class="dropdown-item" value="Химки (Московская область)">Химки (Московская область)</option>
+            <option class="dropdown-item" value="Краснослободск (Республика Мордовия)">Краснослободск (Республика Мордовия)</option>
+            <option class="dropdown-item" value="Холм (Новгородская область)">Холм (Новгородская область)</option>
+            <option class="dropdown-item" value="Краснотурьинск (Свердловская область)">Краснотурьинск (Свердловская область)</option>
+            <option class="dropdown-item" value="Холмск (Сахалинская область)">Холмск (Сахалинская область)</option>
+            <option class="dropdown-item" value="Красноуральск (Свердловская область)">Красноуральск (Свердловская область)</option>
+            <option class="dropdown-item" value="Хотьково (Московская область)">Хотьково (Московская область)</option>
+            <option class="dropdown-item" value="Красноуфимск (Свердловская область)">Красноуфимск (Свердловская область)</option>
+            <option class="dropdown-item" value="Цивильск (Чувашская Республика - Чувашия)">Цивильск (Чувашская Республика - Чувашия)</option>
+            <option class="dropdown-item" value="Красноярск (Красноярский край)">Красноярск (Красноярский край)</option>
+            <option class="dropdown-item" value="Цимлянск (Ростовская область)">Цимлянск (Ростовская область)</option>
+            <option class="dropdown-item" value="Красный Кут (Саратовская область)">Красный Кут (Саратовская область)</option>
+            <option class="dropdown-item" value="Циолковский (Амурская область)">Циолковский (Амурская область)</option>
+            <option class="dropdown-item" value="Красный Сулин (Ростовская область)">Красный Сулин (Ростовская область)</option>
+            <option class="dropdown-item" value="Чёрмоз (Пермский край)">Чёрмоз (Пермский край)</option>
+            <option class="dropdown-item" value="Красный Холм (Тверская область)">Красный Холм (Тверская область)</option>
+            <option class="dropdown-item" value="Чадан (Республика Тыва)">Чадан (Республика Тыва)</option>
+            <option class="dropdown-item" value="Кремёнки (Калужская область)">Кремёнки (Калужская область)</option>
+            <option class="dropdown-item" value="Чайковский (Пермский край)">Чайковский (Пермский край)</option>
+            <option class="dropdown-item" value="Кропоткин (Краснодарский край)">Кропоткин (Краснодарский край)</option>
+            <option class="dropdown-item" value="Чапаевск (Самарская область)">Чапаевск (Самарская область)</option>
+            <option class="dropdown-item" value="Крымск (Краснодарский край)">Крымск (Краснодарский край)</option>
+            <option class="dropdown-item" value="Чаплыгин (Липецкая область)">Чаплыгин (Липецкая область)</option>
+            <option class="dropdown-item" value="Кстово (Нижегородская область)">Кстово (Нижегородская область)</option>
+            <option class="dropdown-item" value="Чебаркуль (Челябинская область)">Чебаркуль (Челябинская область)</option>
+            <option class="dropdown-item" value="Кубинка (Московская область)">Кубинка (Московская область)</option>
+            <option class="dropdown-item" value="Чебоксары (Чувашская Республика - Чувашия)">Чебоксары (Чувашская Республика - Чувашия)</option>
+            <option class="dropdown-item" value="Кувандык (Оренбургская область)">Кувандык (Оренбургская область)</option>
+            <option class="dropdown-item" value="Чегем (Кабардино-Балкарская Республика)">Чегем (Кабардино-Балкарская Республика)</option>
+            <option class="dropdown-item" value="Кувшиново (Тверская область)">Кувшиново (Тверская область)</option>
+            <option class="dropdown-item" value="Чекалин (Тульская область)">Чекалин (Тульская область)</option>
+            <option class="dropdown-item" value="Кудрово (Ленинградская область)">Кудрово (Ленинградская область)</option>
+            <option class="dropdown-item" value="Челябинск">Челябинск</option>
+            <option class="dropdown-item" value="Кудымкар (Пермский край)">Кудымкар (Пермский край)</option>
+            <option class="dropdown-item" value="Чердынь (Пермский край)">Чердынь (Пермский край)</option>
+            <option class="dropdown-item" value="Кузнецк (Пензенская область)">Кузнецк (Пензенская область)</option>
+            <option class="dropdown-item" value="Черемхово (Иркутская область)">Черемхово (Иркутская область)</option>
+            <option class="dropdown-item" value="Куйбышев (Новосибирская область)">Куйбышев (Новосибирская область)</option>
+            <option class="dropdown-item" value="Черепаново (Новосибирская область)">Черепаново (Новосибирская область)</option>
+            <option class="dropdown-item" value="Кукмор (Республика Татарстан)">Кукмор (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Череповец (Вологодская область)">Череповец (Вологодская область)</option>
+            <option class="dropdown-item" value="Кулебаки (Нижегородская область)">Кулебаки (Нижегородская область)</option>
+            <option class="dropdown-item" value="Черкесск (Карачаево-Черкесская Республика)">Черкесск (Карачаево-Черкесская Республика)</option>
+            <option class="dropdown-item" value="Кумертау (Республика Башкортостан)">Кумертау (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Черноголовка (Московская область)">Черноголовка (Московская область)</option>
+            <option class="dropdown-item" value="Кунгур (Пермский край)">Кунгур (Пермский край)</option>
+            <option class="dropdown-item" value="Черногорск (Республика Хакасия)">Черногорск (Республика Хакасия)</option>
+            <option class="dropdown-item" value="Купино (Новосибирская область)">Купино (Новосибирская область)</option>
+            <option class="dropdown-item" value="Чернушка (Пермский край)">Чернушка (Пермский край)</option>
+            <option class="dropdown-item" value="Курган">Курган</option>
+            <option class="dropdown-item" value="Черняховск (Калининградская область)">Черняховск (Калининградская область)</option>
+            <option class="dropdown-item" value="Курганинск (Краснодарский край)">Курганинск (Краснодарский край)</option>
+            <option class="dropdown-item" value="Чехов (Московская область)">Чехов (Московская область)</option>
+            <option class="dropdown-item" value="Курильск (Сахалинская область)">Курильск (Сахалинская область)</option>
+            <option class="dropdown-item" value="Чистополь (Республика Татарстан)">Чистополь (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Курлово (Владимирская область)">Курлово (Владимирская область)</option>
+            <option class="dropdown-item" value="Чита (Забайкальский край)">Чита (Забайкальский край)</option>
+            <option class="dropdown-item" value="Куровское (Московская область)">Куровское (Московская область)</option>
+            <option class="dropdown-item" value="Чкаловск (Нижегородская область)">Чкаловск (Нижегородская область)</option>
+            <option class="dropdown-item" value="Курск">Курск</option>
+            <option class="dropdown-item" value="Чудово (Новгородская область)">Чудово (Новгородская область)</option>
+            <option class="dropdown-item" value="Куртамыш (Курганская область)">Куртамыш (Курганская область)</option>
+            <option class="dropdown-item" value="Чулым (Новосибирская область)">Чулым (Новосибирская область)</option>
+            <option class="dropdown-item" value="Курчалой (Чеченская Республика)">Курчалой (Чеченская Республика)</option>
+            <option class="dropdown-item" value="Чусовой (Пермский край)">Чусовой (Пермский край)</option>
+            <option class="dropdown-item" value="Курчатов (Курская область)">Курчатов (Курская область)</option>
+            <option class="dropdown-item" value="Чухлома (Костромская область)">Чухлома (Костромская область)</option>
+            <option class="dropdown-item" value="Куса (Челябинская область)">Куса (Челябинская область)</option>
+            <option class="dropdown-item" value="Шагонар (Республика Тыва)">Шагонар (Республика Тыва)</option>
+            <option class="dropdown-item" value="Кушва (Свердловская область)">Кушва (Свердловская область)</option>
+            <option class="dropdown-item" value="Шадринск (Курганская область)">Шадринск (Курганская область)</option>
+            <option class="dropdown-item" value="Кызыл (Республика Тыва)">Кызыл (Республика Тыва)</option>
+            <option class="dropdown-item" value="Шали (Чеченская Республика)">Шали (Чеченская Республика)</option>
+            <option class="dropdown-item" value="Кыштым (Челябинская область)">Кыштым (Челябинская область)</option>
+            <option class="dropdown-item" value="Шарыпово (Красноярский край)">Шарыпово (Красноярский край)</option>
+            <option class="dropdown-item" value="Кяхта (Республика Бурятия)">Кяхта (Республика Бурятия)</option>
+            <option class="dropdown-item" value="Шарья (Костромская область)">Шарья (Костромская область)</option>
+            <option class="dropdown-item" value="Лабинск (Краснодарский край)">Лабинск (Краснодарский край)</option>
+            <option class="dropdown-item" value="Шатура (Московская область)">Шатура (Московская область)</option>
+            <option class="dropdown-item" value="Лабытнанги (Ямало-Ненецкий автономный округ)">Лабытнанги (Ямало-Ненецкий автономный округ)</option>
+            <option class="dropdown-item" value="Шахты (Ростовская область)">Шахты (Ростовская область)</option>
+            <option class="dropdown-item" value="Лагань (Республика Калмыкия)">Лагань (Республика Калмыкия)</option>
+            <option class="dropdown-item" value="Шахунья (Нижегородская область)">Шахунья (Нижегородская область)</option>
+            <option class="dropdown-item" value="Ладушкин (Калининградская область)">Ладушкин (Калининградская область)</option>
+            <option class="dropdown-item" value="Шацк (Рязанская область)">Шацк (Рязанская область)</option>
+            <option class="dropdown-item" value="Лаишево (Республика Татарстан)">Лаишево (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Шебекино (Белгородская область)">Шебекино (Белгородская область)</option>
+            <option class="dropdown-item" value="Лакинск (Владимирская область)">Лакинск (Владимирская область)</option>
+            <option class="dropdown-item" value="Шелехов (Иркутская область)">Шелехов (Иркутская область)</option>
+            <option class="dropdown-item" value="Лангепас (Ханты-Мансийский автономный округ - Югра)">Лангепас (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Шенкурск (Архангельская область)">Шенкурск (Архангельская область)</option>
+            <option class="dropdown-item" value="Лахденпохья (Республика Карелия)">Лахденпохья (Республика Карелия)</option>
+            <option class="dropdown-item" value="Шилка (Забайкальский край)">Шилка (Забайкальский край)</option>
+            <option class="dropdown-item" value="Лебедянь (Липецкая область)">Лебедянь (Липецкая область)</option>
+            <option class="dropdown-item" value="Шимановск (Амурская область)">Шимановск (Амурская область)</option>
+            <option class="dropdown-item" value="Лениногорск (Республика Татарстан)">Лениногорск (Республика Татарстан)</option>
+            <option class="dropdown-item" value="Шиханы (Саратовская область)">Шиханы (Саратовская область)</option>
+            <option class="dropdown-item" value="Ленинск (Волгоградская область)">Ленинск (Волгоградская область)</option>
+            <option class="dropdown-item" value="Шлиссельбург (Ленинградская область)">Шлиссельбург (Ленинградская область)</option>
+            <option class="dropdown-item" value="Ленинск-Кузнецкий (Кемеровская область)">Ленинск-Кузнецкий (Кемеровская область)</option>
+            <option class="dropdown-item" value="Шумерля (Чувашская Республика - Чувашия)">Шумерля (Чувашская Республика - Чувашия)</option>
+            <option class="dropdown-item" value="Ленск (Республика Саха (Якутия))">Ленск (Республика Саха (Якутия))</option>
+            <option class="dropdown-item" value="Шумиха (Курганская область)">Шумиха (Курганская область)</option>
+            <option class="dropdown-item" value="Лермонтов (Ставропольский край)">Лермонтов (Ставропольский край)</option>
+            <option class="dropdown-item" value="Шуя (Ивановская область)">Шуя (Ивановская область)</option>
+            <option class="dropdown-item" value="Лесной (Свердловская область)">Лесной (Свердловская область)</option>
+            <option class="dropdown-item" value="Щёкино (Тульская область)">Щёкино (Тульская область)</option>
+            <option class="dropdown-item" value="Лесозаводск (Приморский край)">Лесозаводск (Приморский край)</option>
+            <option class="dropdown-item" value="Щёлкино (Республика Крым)">Щёлкино (Республика Крым)</option>
+            <option class="dropdown-item" value="Лесосибирск (Красноярский край)">Лесосибирск (Красноярский край)</option>
+            <option class="dropdown-item" value="Щёлково (Московская область)">Щёлково (Московская область)</option>
+            <option class="dropdown-item" value="Ливны (Орловская область)">Ливны (Орловская область)</option>
+            <option class="dropdown-item" value="Щигры (Курская область)">Щигры (Курская область)</option>
+            <option class="dropdown-item" value="Ликино-Дулёво (Московская область)">Ликино-Дулёво (Московская область)</option>
+            <option class="dropdown-item" value="Щучье (Курганская область)">Щучье (Курганская область)</option>
+            <option class="dropdown-item" value="Липецк">Липецк</option>
+            <option class="dropdown-item" value="Электрогорск (Московская область)">Электрогорск (Московская область)</option>
+            <option class="dropdown-item" value="Липки (Тульская область)">Липки (Тульская область)</option>
+            <option class="dropdown-item" value="Электросталь (Московская область)">Электросталь (Московская область)</option>
+            <option class="dropdown-item" value="Лиски (Воронежская область)">Лиски (Воронежская область)</option>
+            <option class="dropdown-item" value="Электроугли (Московская область)">Электроугли (Московская область)</option>
+            <option class="dropdown-item" value="Лихославль (Тверская область)">Лихославль (Тверская область)</option>
+            <option class="dropdown-item" value="Элиста (Республика Калмыкия)">Элиста (Республика Калмыкия)</option>
+            <option class="dropdown-item" value="Лобня (Московская область)">Лобня (Московская область)</option>
+            <option class="dropdown-item" value="Энгельс (Саратовская область)">Энгельс (Саратовская область)</option>
+            <option class="dropdown-item" value="Лодейное Поле (Ленинградская область)">Лодейное Поле (Ленинградская область)</option>
+            <option class="dropdown-item" value="Эртиль (Воронежская область)">Эртиль (Воронежская область)</option>
+            <option class="dropdown-item" value="Лосино-Петровский (Московская область)">Лосино-Петровский (Московская область)</option>
+            <option class="dropdown-item" value="Югорск (Ханты-Мансийский автономный округ - Югра)">Югорск (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Луга (Ленинградская область)">Луга (Ленинградская область)</option>
+            <option class="dropdown-item" value="Южа (Ивановская область)">Южа (Ивановская область)</option>
+            <option class="dropdown-item" value="Луза (Кировская область)">Луза (Кировская область)</option>
+            <option class="dropdown-item" value="Южно-Сахалинск (Сахалинская область)">Южно-Сахалинск (Сахалинская область)</option>
+            <option class="dropdown-item" value="Лукоянов (Нижегородская область)">Лукоянов (Нижегородская область)</option>
+            <option class="dropdown-item" value="Южно-Сухокумск (Республика Дагестан)">Южно-Сухокумск (Республика Дагестан)</option>
+            <option class="dropdown-item" value="Луховицы (Московская область)">Луховицы (Московская область)</option>
+            <option class="dropdown-item" value="Южноуральск (Челябинская область)">Южноуральск (Челябинская область)</option>
+            <option class="dropdown-item" value="Лысково (Нижегородская область)">Лысково (Нижегородская область)</option>
+            <option class="dropdown-item" value="Юрга (Кемеровская область)">Юрга (Кемеровская область)</option>
+            <option class="dropdown-item" value="Лысьва (Пермский край)">Лысьва (Пермский край)</option>
+            <option class="dropdown-item" value="Юрьев-Польский (Владимирская область)">Юрьев-Польский (Владимирская область)</option>
+            <option class="dropdown-item" value="Лыткарино (Московская область)">Лыткарино (Московская область)</option>
+            <option class="dropdown-item" value="Юрьевец (Ивановская область)">Юрьевец (Ивановская область)</option>
+            <option class="dropdown-item" value="Льгов (Курская область)">Льгов (Курская область)</option>
+            <option class="dropdown-item" value="Юрюзань (Челябинская область)">Юрюзань (Челябинская область)</option>
+            <option class="dropdown-item" value="Любань (Ленинградская область)">Любань (Ленинградская область)</option>
+            <option class="dropdown-item" value="Юхнов (Калужская область)">Юхнов (Калужская область)</option>
+            <option class="dropdown-item" value="Люберцы (Московская область)">Люберцы (Московская область)</option>
+            <option class="dropdown-item" value="Ядрин (Чувашская Республика - Чувашия)">Ядрин (Чувашская Республика - Чувашия)</option>
+            <option class="dropdown-item" value="Любим (Ярославская область)">Любим (Ярославская область)</option>
+            <option class="dropdown-item" value="Якутск (Республика Саха (Якутия))">Якутск (Республика Саха (Якутия))</option>
+            <option class="dropdown-item" value="Людиново (Калужская область)">Людиново (Калужская область)</option>
+            <option class="dropdown-item" value="Ялта (Республика Крым)">Ялта (Республика Крым)</option>
+            <option class="dropdown-item" value="Лянтор (Ханты-Мансийский автономный округ - Югра)">Лянтор (Ханты-Мансийский автономный округ - Югра)</option>
+            <option class="dropdown-item" value="Ялуторовск (Тюменская область)">Ялуторовск (Тюменская область)</option>
+            <option class="dropdown-item" value="Магадан">Магадан</option>
+            <option class="dropdown-item" value="Янаул (Республика Башкортостан)">Янаул (Республика Башкортостан)</option>
+            <option class="dropdown-item" value="Магас (Республика Ингушетия)">Магас (Республика Ингушетия)</option>
+            <option class="dropdown-item" value="Яранск (Кировская область)">Яранск (Кировская область)</option>
+            <option class="dropdown-item" value="Магнитогорск (Челябинская область)">Магнитогорск (Челябинская область)</option>
+            <option class="dropdown-item" value="Яровое (Алтайский край)">Яровое (Алтайский край)</option>
+            <option class="dropdown-item" value="Майкоп (Республика Адыгея)">Майкоп (Республика Адыгея)</option>
+            <option class="dropdown-item" value="Ярославль">Ярославль</option>
+            <option class="dropdown-item" value="Майский (Кабардино-Балкарская Республика)">Майский (Кабардино-Балкарская Республика)</option>
+            <option class="dropdown-item" value="Ярцево (Смоленская область)">Ярцево (Смоленская область)</option>
+            <option class="dropdown-item" value="Макаров (Сахалинская область)">Макаров (Сахалинская область)</option>
+            <option class="dropdown-item" value="Ясногорск (Тульская область)">Ясногорск (Тульская область)</option>
+            <option class="dropdown-item" value="Макарьев (Костромская область)">Макарьев (Костромская область)</option>
+            <option class="dropdown-item" value="Ясный (Оренбургская область)">Ясный (Оренбургская область)</option>
+            <option class="dropdown-item" value="Макушино (Курганская область)">Макушино (Курганская область)</option>
+            <option class="dropdown-item" value="Яхрома (Московская область)">Яхрома (Московская область)</option>
+            <option class="dropdown-item" value="Малая Вишера (Новгородская область)">Малая Вишера (Новгородская область)</option>
+            <option class="dropdown-item" value="Малгобек (Республика Ингушетия)">Малгобек (Республика Ингушетия)</option>
+        </button>
+            <br>
+        <!--<select name="ad_k" id="ad_k" class="form-control">
+	<option class="dropdown-item" value="Адыгея">Республика Адыгея</option>
+	<option class="dropdown-item" value="Алтай">Республика Алтай </option>
+	<option class="dropdown-item" value="Башкортостан">Республика Башкортостан </option>
+	<option class="dropdown-item" value="Бурятия">Республика Бурятия </option>
+	<option class="dropdown-item" value="Дагестан">Республика Дагестан </option>
+	<option value="Ингушетия">Республика Ингушетия </option>
+	<option value="Кабардино-Балкария">Кабардино-Балкарская Республика</option>
+	<option value="Калмыкия">Республика Калмыкия </option>
+	<option value="Карачаево-Черкессия">Карачаево-Черкесская Республика</option>
+	<option value="Карелия">Республика Карелия </option>
+	<option value="Коми">Республика Коми </option>
+	<option value="Марий Эл">Республика Марий Эл </option>
+	<option value="Мордовия">Республика Мордовия</option>
+	<option value="Саха (Якутия)">Республика Саха (Якутия) </option>
+	<option value="Северная Осетия - Алания">Республика Северная Осетия - Алания </option>
+	<option value="Татарстан">Республика Татарстан</option>
+	<option value="Тыва">Республика Тыва </option>
+	<option value="Удмуртская">Удмуртская Республика </option>
+	<option value="Хакасия">Республика Хакасия </option>
+	<option value="Чеченская">Чеченская Республика</option>
+	<option value="Чувашская Республика">Чувашская Республика</option>
+	<option value="Алтайский край">Алтайский край</option>
+	<option value="Забайкальский край">Забайкальский край</option>
+	<option value="Камчатский край">Камчатский край</option>
+	<option value="Краснодарский край">Краснодарский край</option>
+	<option value="Красноярский край">Красноярский край</option>
+	<option value="Пермский край">Пермский край</option>
+	<option value="Приморский край">Приморский край</option>
+	<option value="Ставропольский край">Ставропольский край</option>
+	<option value="Хабаровский край">Хабаровский край</option>
+	<option value="Амурская область">Амурская область</option>
+	<option value="Архангельская область">Архангельская область</option>
+	<option value="Астраханская область">Астраханская область</option>
+	<option value="Белгородская область">Белгородская область</option>
+	<option value="Брянская область">Брянская область </option>
+	<option value="Владимирская область">Владимирская область </option>
+	<option value="Волгоградская область">Волгоградская область </option>
+	<option value="Вологодская область">Вологодская область </option>
+	<option value="Воронежская область">Воронежская область </option>
+	<option value="Ивановская область">Ивановская область </option>
+	<option value="Иркутская область">Иркутская область </option>
+	<option value="Калининградская область">Калининградская область</option>
+	<option value="Калужская область">Калужская область </option>
+	<option value="Кемеровская область">Кемеровская область </option>
+	<option value="Кировская область">Кировская область </option>
+	<option value="Костромская область">Костромская область </option>
+	<option value="Курганская область">Курганская область </option>
+	<option value="Курская область">Курская область </option>
+	<option value="Ленинградская область">Ленинградская область </option>
+	<option value="Липецкая область">Липецкая область </option>
+	<option value="Магаданская область">Магаданская область</option>
+	<option value="Московская область">Московская область </option>
+	<option value="Мурманская область">Мурманская область </option>
+	<option value="Нижегородская область">Нижегородская область </option>
+	<option value="Новгородская область">Новгородская область </option>
+	<option value="Новосибирская область">Новосибирская область </option>
+	<option value="Омская область">Омская область</option>
+	<option value="Оренбургская область">Оренбургская область </option>
+	<option value="Орловская область">Орловская область </option>
+	<option value="Пензенская область">Пензенская область </option>
+	<option value="Псковская область">Псковская область </option>
+	<option value="Ростовская область">Ростовская область </option>
+	<option value="Рязанская область">Рязанская область </option>
+	<option value="Самарская область">Самарская область </option>
+	<option value="Саратовская область">Саратовская область </option>
+	<option value="Сахалинская область">Сахалинская область </option>
+	<option value="Свердловская область">Свердловская область </option>
+	<option value="Смоленская область">Смоленская область </option>
+	<option value="Тамбовская область">Тамбовская область </option>
+	<option value="Тверская область">Тверская область </option>
+	<option value="Томская область">Томская область </option>
+	<option value="Тульская область">Тульская область</option>
+	<option value="Тюменская область">Тюменская область </option>
+	<option value="Ульяновская область">Ульяновская область </option>
+	<option value="Челябинская область">Челябинская область </option>
+	<option value="Ярославская область">Ярославская область</option>
+	<option value="Москва">Москва</option>
+	<option value="Санкт-Петербург">Санкт-Петербург</option>
+	<option value="Еврейская АО">Еврейская АО</option>
+	<option value="Ненецкий АО">Ненецкий АО</option>
+	<option value="Ханты-Мансийский АО">Ханты-Мансийский АО</option>
+	<option value="Чукотский АО">Чукотский АО</option>
+	<option value="Ямало-Ненецкий АО">Ямало-Ненецкий АО</option>
+</select>-->
+        </div>
+            <br>
         <div class="container">
-<div id="actions" class="row">
-    <div class="col-lg-7">
-              <div class="d-flex justify-content-md-between">
-                  <h5> Загрузить картинку для превью
-                    <input type="file" name="prew_img" id="prew_img" multiple="">
-                  </h5>
-                  <h5> Загрузить все картинки услуги
-                  <input type="file" name="img" id="img" multiple="">
-                  </h5>
-              </div>
+    <div class="file-field">
+    <div class="d-flex justify-content-center">
+      <div class="btn btn-mdb-color btn-rounded float-center">
+        <p>Загрузить картинку на preview</p>
+        <input name="prew_img" type="file">
+      </div>
     </div>
+  </div>
+    <div class="file-field">
+    <div class="d-flex justify-content-center">
+      <div class="btn btn-mdb-color btn-rounded float-center">
+        <p>Загрузить все картинки</p>
+        <input name="img" type="file">
+      </div>
+    </div>
+  </div>
 </div>
-            <br>
-            <div id="html_element" name="captcha" class="captcha d-flex justify-content-center" inputmode=""></div>
-            <br>
-            <button type="submit" class="btn-lg btn-block btn-info">Info</button>
+</div>
+<br>
+<div id="html_element" name="captcha" class="captcha d-flex justify-content-center" inputmode=""></div>
+<br>
+<button type="submit" class="btn-lg btn-block btn-info">Info</button>
 
     </form>
+</div>
 </div>
 <script>
     // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument

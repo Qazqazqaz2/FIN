@@ -145,33 +145,11 @@
       overflow: auto;
     }
   </style>
-<div class="row">
-  <div class="col-md-12">
-
-    <div id="mdb-lightbox-ui"></div>
-          {% for im in dt.img %}
-
-    <div class="mdb-lightbox no-margin">
-      <figure class="col-md-4">
-          <a href="{{ url_for('static', filename=im) }}" data-size="1600x1067">
-            <img class="img-fluid bg-dark" src="{{ url_for('static', filename=im) }}" alt="Card image cap">
-          </a>
-      </figure>
-    </div>
-      {% endfor %}
-
-<h1 style="text-align: center; margin-top: 20px; margin-bottom: 20px;">{{ dt.title }}</h1>
-    <div>
-     <iframe width="500" height="400" frameborder="0" src="https://www.bing.com/maps/embed?h=400&w=500&cp={{ dt.lat }}~{{ dt.log }}&lvl=18&typ=d&sty=h&src=SHELL&FORM=MBEDV8" scrolling="no">
-     </iframe>
-     <div style="white-space: nowrap; text-align: center; width: 500px; padding: 6px 0;">
-        <a id="largeMapLink" target="_blank" href="https://www.bing.com/maps?cp={{ dt.lat }}~{{ dt.log }}&amp;sty=h&amp;lvl=18&amp;FORM=MBEDLD">Увеличить карту</a> &nbsp; | &nbsp;
-        <a id="dirMapLink" target="_blank" href="https://www.bing.com/maps/directions?cp={{ dt.lat }}~{{ dt.log }}&amp;sty=h&amp;lvl=18&amp;rtp=~pos.{{ dt.lat }}_{{ dt.log }}____&amp;FORM=MBEDLD">Получить маршрут</a>
-    </div>
-    </div>
-  <div class="cont" tabindex="-1">
+<div class="container" style="padding-top: 100px">
+    <h1 style="text-align: center; margin-top: 20px; margin-bottom: 20px;">{{ dt.title }}</h1>
+    <div class="cont" tabindex="-1">
     <div style="text-align: center;">
-      <a href="#openMod">Открыть модальное окно</a>
+      <a href="#openMod">Посмотреть описание</a>
     </div>
     <div id="openMod" class="mod">
       <div class="mod-dialog">
@@ -188,8 +166,32 @@
                 <button type="button" class="btn btn-primary">На главную</button>
             </div>
         </div>
+        </div>
       </div>
     </div>
+
+  <div class="row">
+       {% for im in dt.img %}
+               <div class="col-xl-6">
+                    <div class="mdb-lightbox">
+                        <figure class="col-md-3 border border-bg-info">
+                            <a href="{{ url_for('static', filename=im) }}" data-size="1600x1067">
+                                <img class="card-img-top img-center center-block" src="{{ url_for('static', filename=im) }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen id="video">
+                            </a>
+                    </figure>
+                 </div>
+               </div>
+      {% endfor %}
+    </div>
+    <div class="d-flex justify-content-end">
+     <iframe width="100%" height="400" frameborder="0" src="https://www.bing.com/maps/embed?h=400&w=500&cp={{ dt.lat }}~{{ dt.log }}&lvl=18&typ=d&sty=h&src=SHELL&FORM=MBEDV8" scrolling="no">
+     </iframe>
+<!--     <div style="white-space: nowrap; text-align: center; width: 500px; padding: 6px 0;">
+       <a id="largeMapLink" target="_blank" href="https://www.bing.com/maps?cp={{ dt.lat }}~{{ dt.log }}&amp;sty=h&amp;lvl=18&amp;FORM=MBEDLD">Увеличить карту</a> &nbsp; | &nbsp;
+        <a id="dirMapLink" target="_blank" href="https://www.bing.com/maps/directions?cp={{ dt.lat }}~{{ dt.log }}&amp;sty=h&amp;lvl=18&amp;rtp=~pos.{{ dt.lat }}_{{ dt.log }}____&amp;FORM=MBEDLD">Получить маршрут</a>
+    </div>-->
+    </div>
+  </div>
   </div>
 <script>
     document.addEventListener("DOMContentLoaded", function () {

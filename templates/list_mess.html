@@ -9,10 +9,10 @@
 <div class="container">
 {% if current_user.is_authenticated %}
 {% for i in list %}
-    {% if i.us_1==current_user.id %}
-        <li><a href="/chat/{{i.id}}/"><h1>{{i.us_2}} hhhh</h1></a></li>
+    {% if i.us_1==current_user.name %}
+        <li><a href="/chat/{{i.id}}/#mess"><h1>{{i.us_2}}</h1></a></li>
         {% endif %}
-    {% if i.us_2==current_user.id %}
+    {% if i.us_2==current_user.name %}
         <li><a href="/chat/{{i.id}}/#mess"><h1>{{i.us_1}}</h1></a></li>
     {% endif %}
 {% endfor %}

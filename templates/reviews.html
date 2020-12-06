@@ -19,6 +19,7 @@
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
 </script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<div class="container" style="padding-top: 100px">
 {% if current_user.is_authenticated %}
 {% for i in itttt %}
     <div class="text-right">
@@ -28,7 +29,8 @@
     {% endif %}
     </div>
 {% endfor %}
-<div class="container" style="padding-top: 30px">
+</div>
+<div class="container">
     <h1>Добавление товара</h1>
     <form method="post" enctype=multipart/form-data>
         <textarea type="text" class="form-control" name="mess" id="mess" placeholder="Описание"></textarea>

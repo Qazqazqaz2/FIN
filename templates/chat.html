@@ -6,7 +6,7 @@
 
 {% block body %}
 {% if current_user.is_authenticated %}
-{% if current_user.id==ch_h.us_1 or current_user.id==ch_h.us_2 %}
+{% if current_user.name==ch_h.us_1 or current_user.name==ch_h.us_2 %}
 <div class="container" style="padding-top: 190px; padding-bottom:200px;">
 {% if ch_h.mess==None: %}
  <h1>Not comments</h1>

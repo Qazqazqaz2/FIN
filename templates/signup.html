@@ -1,6 +1,6 @@
-{% extends "bases.html" %}
+{% extends "base.html" %}
 
-{% block content %}
+{% block body %}
 <script type="text/javascript">
       var verifyCallback = function(response) {
         alert(response);
@@ -12,8 +12,8 @@
         });
       };
     </script>
-<div class="column is-4 is-offset-4">
-    <h3 class="title">Sign Up</h3>
+<div class="column is-4 is-offset-4" style="padding-top: 100px">
+    <h3 class="title text-info text-center">Sign Up</h3>
     <div class="box">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -47,10 +47,9 @@
             </div>
             <input type="file" name="prew_img" id="prew_img" multiple="">
             <br>
-            <div id="html_element" name="captcha" class="captcha" inputmode=""></div>
+            <div id="html_element" name="captcha d-flex justify-content-center" class="captcha" inputmode=""></div>
             <br>
-            <input type="submit" value="Submit">
-<!--            <button class="button is-block is-info is-large is-fullwidth">Sign Up</button> -->
+            <button type="submit" class="button is-block bg-info is-large is-fullwidth">Sign Up</button>
         </form>
     </div>
 </div>

@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Добавление товара</title>
+<title>Edit</title>
 {% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container" style="padding-top:100px">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <div class="notification is-danger">
@@ -13,20 +13,16 @@
     </div>
     {% endif %}
     {% endwith %}
-    <h1>Добавление товара</h1>
 
     <form method="post" enctype=multipart/form-data>
-        <h1>{{main.name}}</h1>
-        <input type="text" class="form-control" name="name_ed" id="name_ed" placeholder="name_ed"><br>
-                <h1>{{main.main_num}}</h1>
-        <input type="text" class="form-control" name="main_num_ed" id="main_num_ed" placeholder="main_num_ed"><br>
-                <h1>{{main.email}}</h1>
-        <input type="text" class="form-control" name="email_ed" id="email_ed" placeholder="email_ed"><br>
-        <input type=submit value="EDIT">
+        <input type="text" class="form-control" name="name_ed" id="name_ed" placeholder="{{main.name}}"><br>
+        <input type="text" class="form-control" name="main_num_ed" id="main_num_ed" placeholder="{{main.main_num}}"><br>
+        <input type="text" class="form-control" name="email_ed" id="email_ed" placeholder="{{main.email}}"><br>
+        <button type="submit" class="button is-block bg-info is-large is-fullwidth">Edit</button>
     </form>
   <form method="post" enctype=multipart/form-data>
-      <p><input type="checkbox" name="delite" value="True">Я хочу удалить аккаунт</p>
-      <p><input type="submit" value="Delite"></p>
+      <p class="text-center"><input type="checkbox" name="delite" value="True">Я хочу удалить аккаунт</p>
+      <button type="submit" class="button is-block bg-danger is-large is-fullwidth">Delete</button>
   </form>
     <!--
 <script>

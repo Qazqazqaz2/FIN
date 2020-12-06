@@ -8,26 +8,42 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script type="text/javascript" src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 <body>
-        <ul class="ul border-info navbar-fixed-top" style="z-index: 1">
-            {% if not current_user.is_authenticated %}
-            <li class="li" style="float:right"><a class="a" href="/signup">sign_up</a></li>
-            <li class="li" style="float:right"><a class="a" href="/login">login</a></li>
-            {% endif %}
-            {% if current_user.is_authenticated %}
-            <li class="li" style="float:right"><a class="a" href="/list/mess">Сообщения</a></li>
-            <li class="li" style="float:right"><a class="a" href="/profile">Профиль</a></li>
-            <li class="li" style="float:right"><a class="a" href="{{ url_for('logout') }}">logout</a></li>
-            <li class="li" style="float:right"><a class="a" href="/create">Создать услугу</a></li>
-            {% endif %}
-            <li class="li" style="float:right"><a class="a" href="/">Главнвя</a></li>
-            <li class="li" style="float:left"><a class="a" href="/">Fin</a></li>
-            <form class="li a form-inline pt-3 mt-6 mt-md-6 justify-content-center" action="{{url_for('result')}}" method="post">
-                <input class="form-control mr-sm-2 justify-content-center" type="text" id="search" name="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-info my-3 my-sm-0" type="submit">Search</button>
-            </form>
-          </ul>
+        <nav class="navbar navbar-expand-lg  navbar-light navbar-fixed-top bg-light" style="position:fixed; display: inline-block; width: 100%;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="/" style="float: left">FIN</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav ml-auto">
+                    <form class="li a form-inline my-2 my-lg-0 justify-content-center" action="{{url_for('result')}}" method="post">
+                        <input class="form-control mr-sm-2 justify-content-center" type="text" id="search" name="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-info my-3 my-sm-0" type="submit">Search</button>
+                    </form>
+
+                    {% if not current_user.is_authenticated %}
+                    <li class="li" style="float:right"><a class="a nav-link" href="/signup">sign_up</a></li>
+                    <li class="li" style="float:right"><a class="a nav-link" href="/login">login</a></li>
+                    {% endif %}
+                     {% if current_user.is_authenticated %}
+                    <li class="li" style="float:right"><a class="a nav-link" href="/list/mess">Сообщения</a></li>
+                    <li class="li" style="float:right"><a class="a nav-link" href="/profile">Профиль</a></li>
+                    <li class="li" style="float:right"><a class="a nav-link" href="{{ url_for('logout') }}">logout</a></li>
+                    <li class="li" style="float:right"><a class="a nav-link" href="/create">Создать услугу</a></li>
+                    {% endif %}
+                    <li class="li" style="float:right"><a class="a nav-link" href="/">Главнвя</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
         {% block body %}{% endblock %}
         </body>
 </html>
