@@ -23,12 +23,6 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <style>
-.box__dragndrop,
-.box__uploading,
-.box__success,
-.box__error {
-  display: none;
-}
   .dropbtn {
   background-color: #4CAF50;
   color: white;
@@ -91,19 +85,13 @@
     {% endif %}
     {% endwith %}
     <form method="post" class="md-form" enctype=multipart/form-data>
-        <input type="text" class="form-control" name="title" id="title" placeholder="Введите название"><br>
+        <input type="text" class="form-control" name="name" id="title" placeholder="Введите имя"><br>
         <br>
-        <input type="text" class="form-control" name="price" id="price" placeholder="Цена">
+        <input type="text" class="form-control" name="mail" placeholder="Почта">
         <br>
-        <textarea type="text" class="form-control" name="text" id="text" placeholder="Описание"></textarea>
+        <input type="text" class="form-control" name="phone" placeholder="Телефон">
         <br>
-        <div class="container border">
-        <input type="text" class="form-control" name="index" id="index" placeholder="Индекс">
-        <br>
-        <h4 class="text-center">Или</h4>
-        <input type="text" class="form-control" name="ad_ul" id="ad_ul" placeholder="Улица">
-        <br>
-        <input type="text" class="form-control" name="adr_hou" id="adr_hou" placeholder="Квартира или дом">
+        <textarea type="text" class="form-control" name="comment" placeholder="Коментарий"></textarea>
         <br>
     <select name="ad_k" class="selectpicker" data-show-subtext="true" data-live-search="true" searchable="Найти город">
       <option data-subtext="Абаза (Республика Хакасия)" value="Абаза (Республика Хакасия)">Абаза (Республика Хакасия)</option>
@@ -1222,35 +1210,13 @@
 <option data-subtext="Яхрома (Московская область)" value="Яхрома (Московская область)">Яхрома (Московская область)</option>
 <option data-subtext="Малая Вишера (Новгородская область)" value="Малая Вишера (Новгородская область)">Малая Вишера (Новгородская область)</option>
 <option data-subtext="Малгобек (Республика Ингушетия)" value="Малгобек (Республика Ингушетия)">Малгобек (Республика Ингушетия)</option>
-
     </select>
-          <br>
-        <div class="container">
-    <div class="file-field">
-    <div class="d-flex justify-content-center">
-      <div class="btn btn-mdb-color btn-rounded float-center">
-        <p>Загрузить картинку на preview</p>
-        <input name="prew_img" type="file">
-      </div>
-    </div>
-  </div>
-    <div class="file-field">
-    <div class="d-flex justify-content-center">
-      <div class="btn btn-mdb-color btn-rounded float-center">
-        <p>Загрузить все картинки</p>
-        <input name="img[]" type="file"  id="file" data-multiple-caption="{count} files selected" multiple>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
 <br>
 <div id="html_element" name="captcha" class="captcha d-flex justify-content-center" inputmode=""></div>
 <br>
-<button type="submit" class="btn-lg btn-block btn-info">Info</button>
+<button type="submit" class="btn-lg btn-block btn-info">Заказать</button>
 
     </form>
-</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>

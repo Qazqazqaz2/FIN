@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block body %}
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+</script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <style>
     body {
       font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -170,29 +174,80 @@
       </div>
     </div>
 
-  <div class="row">
-       {% for im in dt.img %}
-               <div class="col-xl-6">
-                    <div class="mdb-lightbox">
-                        <figure class="col-md-3 border border-bg-info">
-                            <a href="{{ url_for('static', filename=im) }}" data-size="1600x1067">
-                                <img class="card-img-top img-center center-block" src="{{ url_for('static', filename=im) }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen id="video">
-                            </a>
-                    </figure>
-                 </div>
-               </div>
-      {% endfor %}
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <a href="{{ url_for('static', filename=dt.prew_img) }}">
+            <img style="max-height:500px" class="d-block w-100" src="{{ url_for('static', filename=dt.prew_img) }}" alt="First slide">
+        </a>
     </div>
+       {% for im in dt.img %}
+                   <div class="carousel-item">
+                            <a href="{{ url_for('static', filename=im) }}" data-size="1600x1067">
+                              <img style="max-height:500px" class="d-block w-100" src="{{ url_for('static', filename=im) }}" alt="Third slide">
+                            </a>
+                       </div>
+      {% endfor %}
+
+    </div>
+    <div class="align-items-center">
+                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <div class="carousel-control-prev bg-info border border-info" style="border: 3px solid black;max-height:600px;clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 100% 100%, 0% 50%, 100% 0);" aria-hidden="true"></div>
+                             <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" style="" data-slide="next">
+                            <div class="carousel-control-next bg-info border border-dark" style="padding-top:40%;max-height:600px;clip-path: polygon(0 0, 100% 50%, 0 100%, 0% 100%, 25% 50%, 0% 0%);" aria-hidden="true"></div>
+                            <span class="sr-only">Next</span>
+                        </a>
+    </div>
+    </div>
+<br>
+        <div class="d-flex justify-content-end">
+                                <div class="col-md-5">
+                        {% if current_user.is_authenticated and current_user.id==dt.creator_id %}
+                            <a href="/edit_item/{{dt.id}}" class="btn btn-info is-fullwidth btn-lg" role="button" aria-pressed="true">
+                                Редактировать услугу
+                            </a>
+                                {%elif not current_user.is_authenticated%}
+                                <a href="/send_service/{{ dt.id }}" class="btn is-fullwidth btn-info btn-lg" role="button" aria-pressed="true">
+                                Заказать
+                                </a>
+                                {%else%}
+                                <form method="post" style="padding-bottom:40px" class="justify-content-center" enctype=multipart/form-data>
+                                    <textarea type="text" class="form-control" name="comment" placeholder="Комментарий к заказу"></textarea>
+                                    <br>
+                                    <div id="html_element" name="captcha" class="captcha d-flex justify-content-center" inputmode=""></div>
+                                    <br>
+                                    <button type="submit" class="btn is-fullwidth btn-info btn-lg" role="button" aria-pressed="true">
+                                    Заказать
+                                    </button>
+                                </form>
+                                {%endif%}
+                    </div>
+        </div>
     <div class="d-flex justify-content-end">
      <iframe width="100%" height="400" frameborder="0" src="https://www.bing.com/maps/embed?h=400&w=500&cp={{ dt.lat }}~{{ dt.log }}&lvl=18&typ=d&sty=h&src=SHELL&FORM=MBEDV8" scrolling="no">
      </iframe>
+    </div>
 <!--     <div style="white-space: nowrap; text-align: center; width: 500px; padding: 6px 0;">
        <a id="largeMapLink" target="_blank" href="https://www.bing.com/maps?cp={{ dt.lat }}~{{ dt.log }}&amp;sty=h&amp;lvl=18&amp;FORM=MBEDLD">Увеличить карту</a> &nbsp; | &nbsp;
         <a id="dirMapLink" target="_blank" href="https://www.bing.com/maps/directions?cp={{ dt.lat }}~{{ dt.log }}&amp;sty=h&amp;lvl=18&amp;rtp=~pos.{{ dt.lat }}_{{ dt.log }}____&amp;FORM=MBEDLD">Получить маршрут</a>
     </div>-->
     </div>
   </div>
-  </div>
+
+<script type="text/javascript">
+      var verifyCallback = function(response) {
+        alert(response);
+      };
+      var onloadCallback = function() {
+        grecaptcha.render('html_element', {
+          'sitekey' : '6LeBCfIZAAAAAO39_L4Gd7f6uCM0PfP_N3XjHxkW',
+          'theme' : 'dark'
+        });
+      };
+    </script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
       var scrollbar = document.body.clientWidth - window.innerWidth + 'px';

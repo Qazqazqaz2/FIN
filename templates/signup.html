@@ -22,7 +22,7 @@
             </div>
         {% endif %}
         {% endwith %}
-        <form action="/signup" method="POST" enctype=multipart/form-data>
+        <form class="justify-content-center" action="/signup" method="POST" enctype=multipart/form-data>
             <div class="field">
                 <div class="control">
                     <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="">
@@ -30,7 +30,7 @@
             </div>
             <div class="field">
                 <div class="control">
-                    <input class="input is-large" type="text" name="main_num" placeholder="Number" autofocus="">
+                    <input class="input is-large" type="tel" name="main_num" placeholder="Number: 79831111111" autofocus="">
                 </div>
             </div>
 
@@ -45,9 +45,9 @@
                     <input class="input is-large" type="password" name="password" placeholder="Password">
                 </div>
             </div>
-            <input type="file" name="prew_img" id="prew_img" multiple="">
-            <br>
-            <div id="html_element" name="captcha d-flex justify-content-center" class="captcha" inputmode=""></div>
+            <input type="file" class="input" name="prew_img" id="prew_img" multiple="">
+                <br>
+            <div id="html_element" name="captcha" class="captcha d-flex justify-content-center" inputmode=""></div>
             <br>
             <button type="submit" class="button is-block bg-info is-large is-fullwidth">Sign Up</button>
         </form>

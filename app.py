@@ -19,13 +19,13 @@ con = psycopg2.connect(
     host="localhost",
     database="postgres",
     user="postgres",
-    password="XXX")
+    password="762341Aa")
 
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 
 
-DB_URL = 'postgresql://postgres:XXX@localhost:6432/postgres'
+DB_URL = 'postgresql://postgres:762341Aa@localhost:6432/postgres'
 UPLOAD_FOLDER = r'/home/armianin/FIfe/Fin/static'
 ALLOWED_EXTENSIONS = {'jpeg', 'jpg', 'png'}
 app = Flask(__name__)
@@ -34,8 +34,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #app.config['GOOGLEMAPS_KEY'] = "XXX"
 app.config['RECAPTCHA_USE_SSL']= False
-app.config['RECAPTCHA_PUBLIC_KEY'] = 'XXX'
-app.config['RECAPTCHA_PRIVATE_KEY'] = 'XXX'
+app.config['RECAPTCHA_PUBLIC_KEY'] ='6LeBCfIZAAAAAO39_L4Gd7f6uCM0PfP_N3XjHxkW'
+app.config['RECAPTCHA_PRIVATE_KEY'] ='6LeBCfIZAAAAAJTjq0Xz_ndAW9LByCo1nJJKy'
 app.config['RECAPTCHA_OPTIONS'] = {'theme':'black'}
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -116,6 +116,15 @@ class Chat(db.Model):
         self.pub_date = pub_date
         self.mess = mess
 
+class Service(db.Model):
+    __tablename__ = 'service'
+    us = db.Column(db.Integer)
+    id = db.Column(db.Integer, primary_key=True)
+    mess = db.Column(db.TEXT)
+    def __init__(self, mess, us):
+        self.us = us
+        self.mess = mess
+
 @app.route('/')
 def index():
     s = ""
@@ -140,15 +149,15 @@ def login_post():
     password = request.form.get('password')
     remember = True if request.form.get('remember') else False
     captcha_response = request.form['g-recaptcha-response']
-    print(captcha_response)
     if str(captcha_response)=='':
-        print('xxx')
         return redirect('/login')
+    #password = hashlib.sha256(str(password).encode('utf-8')).hexdigest()
     user = User.query.filter_by(email=email).first()
-
-    if not user and not check_password_hash(user.password, password):
-        flash('Please check your login details and try again.')
-        return redirect(url_for('.login'))
+    if check_password_hash(user.password, password) == False:
+        flash('Пароль или email введён неверно')
+        return redirect(url_for('login'))
+    print(password)
+#    user = User.query.get(User.email==email and User.password==password).first()
 
     login_user(user, remember=remember)
     time.sleep(3)
@@ -171,18 +180,34 @@ def signup_post():
         print('xxx')
         return redirect('/signup')
     print(prew_img.filename, 111)
+    user = User.query.filter_by(email=email).first()
+    num = User.query.filter_by(main_num=main_num).first()
+    login = User.query.filter_by(name=name).first()
+    if num:
+        flash('Тел.номер занят')
+        return redirect(url_for('signup'))
+
+    if user:
+        flash('Email занят')
+        return redirect(url_for('signup'))
+
+    if login:
+        flash('Login занят')
+        return redirect(url_for('signup'))
+
+    if len(password) < 8:
+        flash('Пароль меньше 8 символов')
+        return redirect(url_for('signup'))
+
     if prew_img.filename == '':
         prew_img.filename = 'Без_названия.png'
     else:
-        prew_img.save(os.path.join(app.config['UPLOAD_FOLDER'], prew_img.filename))
-    user = User.query.filter_by(email=email).first()
-    if user:
-        flash('Email address already exists.')
-
-
-
-        return redirect(url_for('signup'))
-
+        prew_form = prew_img.filename
+        prew_form = str.split(prew_form, '.')
+        if str(prew_form[-1])=='png' or str(prew_form[-1])=='jpg':
+            prew_img.save(os.path.join(app.config['UPLOAD_FOLDER'], str(email) + str(name) + str(main_num)) + '.' + str(prew_form[-1]))
+        else:
+            flash('Неправильный формат файла. Нужен jpg(jpeg) или png')
     new_user = User(main_num=main_num, email=email, name=name, password=generate_password_hash(password, method='sha256'), prew_img=prew_img.filename)
 
     db.session.add(new_user)
@@ -232,8 +257,58 @@ def view(id):
     #else:
      #   session['visits'] = 1  # настройка данных сессии
     #item = session.get('visits')
+   its = Item.query.get(id)
+   if request.method == 'POST':
+       captcha_response = request.form['g-recaptcha-response']
+       print(captcha_response)
+       if str(captcha_response)=='':
+            print('xxx')
+            return redirect(f'/send_service/{id}')
+       comment = request.form['comment']
+       name = current_user.name
+       phone = current_user.main_num
+       mail = current_user.email
+#       city = current_user.city
+       mess = str(f'(Имя : {name} ),( Телефон : {phone} ),( Почта : {mail} ),( Коментарий : {comment}),( Услуга : {its.title}),(ссылка на профиль : /profile/{current_user.id}/)')
+       send = Service(mess=mess, us=its.creator_id)
+       db.session.add(send)
+       db.session.commit()
+       return redirect(f'/view/{id}')
+   else:
+       return render_template('view.html', dt=its)
+
+@app.route('/send_service/<int:id>', methods=['POST', 'GET'])
+def red_time_date(id):
+    if current_user.is_authenticated:
+        return redirect(f'/view/{id}/')
     its = Item.query.get(id)
-    return render_template('view.html', dt=its)
+    if request.method == "POST":
+        captcha_response = request.form['g-recaptcha-response']
+        print(captcha_response)
+        if str(captcha_response)=='':
+            print('xxx')
+            return redirect(f'/send_service/{id}')
+        city = request.form.get('ad_k')
+        name = request.form['name']
+        phone = request.form['phone']
+        mail = request.form['mail']
+        comment = request.form['comment']
+        print('xx')
+        mess = str(f'(Имя : {name} ),( Город : {city} ),( Телефон : {phone} ),( Почта : {mail} ),( Коментарий : {comment}),( Услуга : {its.title})')
+        send = Service(mess=mess, us=its.creator_id)
+        print(send)
+        db.session.add(send)
+        db.session.commit()
+        print('xxx')
+        return redirect(f'/view/{id}')
+    else:
+        return render_template('time_date.html')
+
+@app.route('/list/service', methods=['GET'])
+@login_required
+def list_service():
+    ser = db.session.query(Service).filter_by(us=current_user.id).all()
+    return render_template('list_ser.html', ser=ser)
 
 @app.route("/",methods=["POST"])
 def result():
@@ -257,6 +332,11 @@ def profile():
 @login_required
 def edit():
     print('111')
+    captcha_response = request.form['g-recaptcha-response']
+    print(captcha_response)
+    if str(captcha_response)=='':
+        print('xxx')
+        return redirect('/edit/')
     id = User.query.filter_by(id=current_user.id).first()
     print(request.form.get('delite'))
     if request.form.get('delite') == 'True':
@@ -316,6 +396,61 @@ def edit_vi():
         return render_template('edit.html', main=current_user)
     else:
         return redirect('/')
+
+@app.route('/edit_item/<int:id>',  methods=['POST'])
+@login_required
+def edit_item(id):
+    item = Item.query.get(id)
+    captcha_response = request.form['g-recaptcha-response']
+    print(captcha_response)
+    if str(captcha_response)=='':
+        print('xxx')
+        return redirect('/edit/')
+    id = Item.query.filter_by(id=id).first()
+    print(request.form.get('delite'))
+    if request.form.get('delite') == 'True':
+        print('1111')
+        db.session.delete(id)
+        db.session.commit()
+    else:
+        title_ed = request.form['title_ed']
+        #reg_ed = request.form['main_num_ed']
+        text_ed = request.form['text_ed']
+        price = request.form['price']
+
+        print(title_ed, text_ed, price)
+        #  prof_img = request.files['prof_img']
+        if text_ed == '':
+            print('title none')
+        elif text_ed==item.text:
+            print('its')
+        else:
+            item.text = text_ed
+        if title_ed == '':
+            print('name_none')
+        elif title_ed==item.title:
+            print('its')
+        else:
+            item.title = title_ed
+        if price == '':
+            print('num none')
+        elif price==item.price:
+            print('its')
+        else:
+            item.price = price
+
+        db.session.commit()
+
+        return redirect(url_for('index'))
+
+@app.route('/edit_item/<int:id>',  methods=['GET'])
+@login_required
+def edit_vi_item(id):
+    item = Item.query.get(id)
+    if current_user.id==item.creator_id:
+        return render_template('edit_item.html', main=item)
+    else:
+        return redirect(f'/view/{id}')
 
 @app.route('/chat/<int:id>/', methods=['POST', 'GET'])
 @login_required
@@ -435,8 +570,7 @@ def create():
         title = request.form['title']
         price = request.form['price']
         adr_ul = request.form['ad_ul']
-        adr_ci = request.form['ad_ci']
-        adr_k = request.form['ad_k']
+        adr_k = request.form.get('ad_k')
         adr_hou = request.form['adr_hou']
         index = request.form['index']
         captcha_response = request.form['g-recaptcha-response']
@@ -444,7 +578,7 @@ def create():
         if str(captcha_response)=='':
             print('xxx')
             return redirect('/create')
-        img = request.files.getlist('img')
+        img = request.files.getlist('img[]')
         text = request.form['text']
         prew_img = request.files['prew_img']
         print(str(index) + '1')
@@ -459,12 +593,12 @@ def create():
 
         else:
             print('a')
-            a=adr_ci
             b=adr_ul
             k=adr_k
             c=adr_hou
-            geolocator = Nominatim(user_agent=str(adr_ci + adr_ul + adr_hou).encode('utf-8'))
-            location = geolocator.geocode(k +' '+ a+' '+b+' '+c)
+            geolocator = Nominatim(user_agent=str( adr_ul + adr_hou).encode('utf-8'))
+            location = geolocator.geocode(b +' '+c+' '+k)
+            print(location)
             print((location.latitude, location.longitude))
             lat = location.latitude
             log = location.longitude
@@ -476,12 +610,15 @@ def create():
         fname = []
         print(img)
         for im in img:
-            imm = im.filename
+#            imm = im.filename
+            imm = str(title) + str(price) + str(current_user.name) + str(randint(0, 10000))
             im.save(os.path.join(app.config['UPLOAD_FOLDER'], imm))
             fname.append(imm)
         print(fname)
-        prew_img.save(os.path.join(app.config['UPLOAD_FOLDER'], prew_img.filename))
-        item = Item(title=str(title), price=price, img=fname, text=text, prew_img=prew_img.filename, ad=str(ad), lat=str(lat), log=str(log), creator_id=current_user.id)
+        pre_img = str(prew_img.filename) + str(title) + str(price) + str(current_user.name) + str(randint(0, 10000)) + str('prew')
+        prew_img.save(os.path.join(app.config['UPLOAD_FOLDER'],
+                                   pre_img))
+        item = Item(title=str(title), price=price, img=fname, text=text, prew_img=pre_img, ad=str(ad), lat=str(lat), log=str(log), creator_id=current_user.id)
         print(fname)
         db.session.add(item)
         print(item)
@@ -492,4 +629,4 @@ def create():
 
 app.secret_key = 'some_secret_key'
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False, host='192.168.1.4')
