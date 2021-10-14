@@ -1,141 +1,34 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session, make_response, g, jsonify
-from flask_login import current_user, LoginManager
+from flask import render_template, request, redirect, url_for, flash
+from flask_login import current_user
 import base64
-from flask_login import login_user, logout_user, login_required, UserMixin
+from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
-from werkzeug.utils import secure_filename
-from flask_sqlalchemy import SQLAlchemy
 import os
-from flask_migrate import Migrate
-import psycopg2
-import psycopg2.extensions
 from geopy.geocoders import Nominatim
 from random import randint
-import datetime, time
-from flask_redis import FlaskRedis
+from con import *
 
-
-con = psycopg2.connect(
-    host="localhost",
-    database="postgres",
-    user="postgres",
-    password="762341Aa")
-
-psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
-psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
-
-
-DB_URL = 'postgresql://postgres:762341Aa@localhost:6432/postgres'
-UPLOAD_FOLDER = r'/home/armianin/FIfe/Fin/static'
-ALLOWED_EXTENSIONS = {'jpeg', 'jpg', 'png'}
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#app.config['GOOGLEMAPS_KEY'] = "XXX"
-app.config['RECAPTCHA_USE_SSL']= False
-app.config['RECAPTCHA_PUBLIC_KEY'] ='6LeBCfIZAAAAAO39_L4Gd7f6uCM0PfP_N3XjHxkW'
-app.config['RECAPTCHA_PRIVATE_KEY'] ='6LeBCfIZAAAAAJTjq0Xz_ndAW9LByCo1nJJKy'
-app.config['RECAPTCHA_OPTIONS'] = {'theme':'black'}
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-db_cursor = con.cursor()
-
-class Item(db.Model):
-    __tablename__ = 'item'
-    id = db.Column(db.Integer, primary_key=True)
-    isactive = db.Column(db.Boolean, default=True)
-    title = db.Column(db.String(100), nullable=False)
-    img = db.Column(db.ARRAY(db.TEXT), nullable=False)
-    text = db.Column(db.String, nullable=False)
-    price = db.Column(db.Integer, nullable=False)
-    creator_id = db.Column(db.Integer, nullable=False)
-    prew_img = db.Column(db.Text, nullable=False)
-    lat = db.Column(db.Text, nullable=False)
-    log = db.Column(db.Text, nullable=False)
-    ad = db.Column(db.Text, nullable=False)
-    def __init__(self, title, price, img, text, prew_img, ad, lat, log, creator_id):
-        self.img = img
-        self.text = text
-        self.title = title
-        self.price = price
-        self.creator_id = creator_id
-        self.prew_img = prew_img
-        self.log = log
-        self.lat = lat
-        self.ad = ad
-    def __abs__(self):
-        return self.title, self.id, self.text, self.video, self.phone
-
-class User(UserMixin, db.Model):
-    __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
-    name = db.Column(db.String(100), unique=True)
-    main_num = db.Column(db.String(11), unique=True)
-    prew_img = db.Column(db.Text, nullable=False)
-
-    def __init__(self, email, name, main_num, password, prew_img):
-        self.email = email
-        self.main_num = main_num
-        self.name = name
-        self.prew_img = prew_img
-        self.password = password
-
-class Comment(db.Model):
-    __tablename__ = 'comment'
-    name = db.Column(db.Text, nullable=False)
-    id = db.Column(db.Integer, primary_key=True)
-    mess = db.Column(db.Text, nullable=False)
-    post_id = db.Column(db.Integer, nullable=False)
-    pub_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
-
-    def __init__(self, post_id, name, pub_date, mess):
-        self.post_id = post_id
-        self.name = name
-        self.pub_date = pub_date
-        self.mess = mess
-
-class Chat(db.Model):
-    __tablename__ = 'chat'
-    name = db.Column(db.ARRAY(db.TEXT))
-    id = db.Column(db.Integer, primary_key=True)
-    mess = db.Column(db.ARRAY(db.TEXT))
-    us_1 = db.Column(db.Text)
-    us_2 = db.Column(db.Text)
-    pub_date = db.Column(db.ARRAY(db.DateTime), default=datetime.datetime.utcnow())
-
-    def __init__(self, name, pub_date, mess, us_1, us_2):
-        self.name = name
-        self.us_1 = us_1
-        self.us_2 = us_2
-        self.pub_date = pub_date
-        self.mess = mess
-
-class Service(db.Model):
-    __tablename__ = 'service'
-    us = db.Column(db.Integer)
-    id = db.Column(db.Integer, primary_key=True)
-    mess = db.Column(db.TEXT)
-    def __init__(self, mess, us):
-        self.us = us
-        self.mess = mess
 
 @app.route('/')
 def index():
     s = ""
-    s += "SELECT id, img, title, ad, prew_img, creator_id FROM item"
+    s += f"SELECT id, img, title, creator_name FROM main WHERE id>={str(0)} AND id<={str(10)};"
 
     db_cursor.execute(s)
 
     array_users = db_cursor.fetchall()
+    array_users = array_users[::-1]
 
+    return render_template('index.html', array_us=array_users, method='utf-8')
+    
+@app.route('/page/<int:id>')
+def main_pages(id):
+    s = ""
+    s += f"SELECT id, img, title, ad, prew_img, creator_id FROM main WHERE id>={str(id)} AND id<={str(int(id)+10)};"
+
+    db_cursor.execute(s)
+    array_users = db_cursor.fetchall()
     print(array_users)
-
 
     return render_template('index.html', array_us=array_users, method='utf-8')
 
@@ -151,13 +44,10 @@ def login_post():
     captcha_response = request.form['g-recaptcha-response']
     if str(captcha_response)=='':
         return redirect('/login')
-    #password = hashlib.sha256(str(password).encode('utf-8')).hexdigest()
     user = User.query.filter_by(email=email).first()
     if check_password_hash(user.password, password) == False:
         flash('Пароль или email введён неверно')
         return redirect(url_for('login'))
-    print(password)
-#    user = User.query.get(User.email==email and User.password==password).first()
 
     login_user(user, remember=remember)
     time.sleep(3)
@@ -175,11 +65,8 @@ def signup_post():
     main_num = request.form.get('main_num')
     prew_img = request.files['prew_img']
     captcha_response = request.form['g-recaptcha-response']
-    print(captcha_response)
     if str(captcha_response)=='':
-        print('xxx')
         return redirect('/signup')
-    print(prew_img.filename, 111)
     user = User.query.filter_by(email=email).first()
     num = User.query.filter_by(main_num=main_num).first()
     login = User.query.filter_by(name=name).first()
@@ -221,318 +108,37 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@app.route('/view/<int:id>/post/', methods=['POST', 'GET'])
-@login_required
-def post(id):
-    if request.method == "POST":
-        itemss = Item.query.get(id)
-        captcha_response = request.form['g-recaptcha-response']
-        print(captcha_response)
-        if str(captcha_response)=='':
-            print('xxx')
-            return redirect('/view/' + str(id) + '/post/')
-        name = current_user.name
-        mess = request.form.get('mess')
-        post_id = itemss.id
-        pub_date = datetime.datetime.utcnow()
-        item = Comment(post_id=post_id, pub_date=pub_date, mess=mess, name=name)
-        print(item)
-        db.session.add(item)
-        print(item)
-        db.session.commit()
-        return redirect('./')
-    else:
-        itemss = db.session.query(Comment).all()
-        for a in itemss:
-            if a.post_id == id:
-                print(a.name)
-                print(a.post_id)
-        print(itemss)
-        return render_template('reviews.html', itttt=itemss, id=id)
-
 @app.route('/view/<int:id>', methods=['POST', 'GET'])
 def view(id):
-   # if 'visits' in session:
-    #    session['visits'] = session.get('visits') + 1  # чтение и обновление данных сессии
-    #else:
-     #   session['visits'] = 1  # настройка данных сессии
-    #item = session.get('visits')
    its = Item.query.get(id)
    if request.method == 'POST':
        captcha_response = request.form['g-recaptcha-response']
-       print(captcha_response)
        if str(captcha_response)=='':
-            print('xxx')
             return redirect(f'/send_service/{id}')
        comment = request.form['comment']
        name = current_user.name
        phone = current_user.main_num
        mail = current_user.email
-#       city = current_user.city
        mess = str(f'(Имя : {name} ),( Телефон : {phone} ),( Почта : {mail} ),( Коментарий : {comment}),( Услуга : {its.title}),(ссылка на профиль : /profile/{current_user.id}/)')
        send = Service(mess=mess, us=its.creator_id)
        db.session.add(send)
        db.session.commit()
        return redirect(f'/view/{id}')
    else:
-       return render_template('view.html', dt=its)
+       for i in its.img:
+           print(str(i))
+       return render_template('view.html', dt=its, dt_len=len(its.img))
 
-@app.route('/send_service/<int:id>', methods=['POST', 'GET'])
-def red_time_date(id):
-    if current_user.is_authenticated:
-        return redirect(f'/view/{id}/')
-    its = Item.query.get(id)
-    if request.method == "POST":
-        captcha_response = request.form['g-recaptcha-response']
-        print(captcha_response)
-        if str(captcha_response)=='':
-            print('xxx')
-            return redirect(f'/send_service/{id}')
-        city = request.form.get('ad_k')
-        name = request.form['name']
-        phone = request.form['phone']
-        mail = request.form['mail']
-        comment = request.form['comment']
-        print('xx')
-        mess = str(f'(Имя : {name} ),( Город : {city} ),( Телефон : {phone} ),( Почта : {mail} ),( Коментарий : {comment}),( Услуга : {its.title})')
-        send = Service(mess=mess, us=its.creator_id)
-        print(send)
-        db.session.add(send)
-        db.session.commit()
-        print('xxx')
-        return redirect(f'/view/{id}')
-    else:
-        return render_template('time_date.html')
-
-@app.route('/list/service', methods=['GET'])
-@login_required
-def list_service():
-    ser = db.session.query(Service).filter_by(us=current_user.id).all()
-    return render_template('list_ser.html', ser=ser)
 
 @app.route("/",methods=["POST"])
 def result():
     searchbox = request.form.get("search")
-    print(searchbox)
     List1 = []
     results = db.session.query(Item).all()
     for i in results:
         if (searchbox in i.title) is True:
             List1.append([i.title, i.creator_id, i.id, i.prew_img])
     return render_template('result.html', count=len(List1), result=List1)
-
-@app.route('/profile/',  methods=['POST', 'GET'])
-@login_required
-def profile():
-    list_item = db.session.query(Item).filter_by(creator_id=current_user.id).all()
-    print(list_item)
-    return render_template('prof_ed.html', ma=current_user, main=list_item, mat=len(list_item))
-
-@app.route('/edit/',  methods=['POST'])
-@login_required
-def edit():
-    print('111')
-    captcha_response = request.form['g-recaptcha-response']
-    print(captcha_response)
-    if str(captcha_response)=='':
-        print('xxx')
-        return redirect('/edit/')
-    id = User.query.filter_by(id=current_user.id).first()
-    print(request.form.get('delite'))
-    if request.form.get('delite') == 'True':
-        print('1111')
-        db.session.delete(id)
-        db.session.commit()
-    else:
-        name_ed = request.form['name_ed']
-        main_num_ed = request.form['main_num_ed']
-        email_ed = request.form['email_ed']
-        prew_img = request.files['prew_img']
-
-        print(name_ed, email_ed, main_num_ed, prew_img.filename)
-        #  prof_img = request.files['prof_img']
-        if email_ed == '':
-            print('mail none')
-        elif email_ed==current_user.email:
-            print('its')
-        else:
-            mail = User.query.filter_by(email=email_ed).first()
-            if mail:
-                flash('Email address already exists.')
-                return redirect(url_for('edit_vi'))
-            else:
-                current_user.email = email_ed
-        if name_ed == '':
-            print('name_none')
-        elif name_ed==current_user.name:
-            print('its')
-        else:
-            name = User.query.filter_by(name=name_ed).first()
-            if name:
-                flash('Name already exists.')
-                return redirect(url_for('edit_vi'))
-            else:
-                current_user.name = name_ed
-        if main_num_ed == '':
-            print('num none')
-        elif main_num_ed==current_user.main_num:
-            print('its')
-        else:
-            num = User.query.filter_by(main_num=main_num_ed).first()
-            if num:
-                flash('Mobile number already exists.')
-                return redirect(url_for('profile'))
-            else:
-                current_user.main_num = main_num_ed
-
-        db.session.commit()
-
-        return redirect(url_for('index'))
-
-@app.route('/edit/',  methods=['GET'])
-@login_required
-def edit_vi():
-    if current_user.is_authenticated:
-        return render_template('edit.html', main=current_user)
-    else:
-        return redirect('/')
-
-@app.route('/edit_item/<int:id>',  methods=['POST'])
-@login_required
-def edit_item(id):
-    item = Item.query.get(id)
-    captcha_response = request.form['g-recaptcha-response']
-    print(captcha_response)
-    if str(captcha_response)=='':
-        print('xxx')
-        return redirect('/edit/')
-    id = Item.query.filter_by(id=id).first()
-    print(request.form.get('delite'))
-    if request.form.get('delite') == 'True':
-        print('1111')
-        db.session.delete(id)
-        db.session.commit()
-    else:
-        title_ed = request.form['title_ed']
-        #reg_ed = request.form['main_num_ed']
-        text_ed = request.form['text_ed']
-        price = request.form['price']
-
-        print(title_ed, text_ed, price)
-        #  prof_img = request.files['prof_img']
-        if text_ed == '':
-            print('title none')
-        elif text_ed==item.text:
-            print('its')
-        else:
-            item.text = text_ed
-        if title_ed == '':
-            print('name_none')
-        elif title_ed==item.title:
-            print('its')
-        else:
-            item.title = title_ed
-        if price == '':
-            print('num none')
-        elif price==item.price:
-            print('its')
-        else:
-            item.price = price
-
-        db.session.commit()
-
-        return redirect(url_for('index'))
-
-@app.route('/edit_item/<int:id>',  methods=['GET'])
-@login_required
-def edit_vi_item(id):
-    item = Item.query.get(id)
-    if current_user.id==item.creator_id:
-        return render_template('edit_item.html', main=item)
-    else:
-        return redirect(f'/view/{id}')
-
-@app.route('/chat/<int:id>/', methods=['POST', 'GET'])
-@login_required
-def chat(id):
-    ch = Chat.query.get(id)
-    T_ch = ch.us_1==current_user.name
-    print(T_ch)
-    if T_ch==False:
-        T_ch = ch.us_2==current_user.name
-        print(T_ch)
-    if T_ch == False:
-        return redirect('/list/mess/')
-    print(ch.us_1)
-    if request.method == "POST" and current_user.is_authenticated:
-        print('1')
-        get_mess = [request.form['mess']]
-        ch = db.session.query(Chat).filter(Chat.id==id).first()
-        ch.mess = ch.mess + get_mess
-        ch.name = ch.name + [current_user.name]
-        ch.pub_date = ch.pub_date + [datetime.datetime.utcnow()]
-        print(ch.pub_date, ch.name, ch.mess)
-        db.session.commit()
-        return redirect('./')
-    else:
-        if ch==None:
-            print('111')
-            col=0
-        else:
-            col = len(ch.mess)
-            print(col)
-        print(ch.mess)
-        return render_template('chat.html', ch_h=ch, col=col)
-
-@app.route('/profile/<int:id>/', methods=['POST', 'GET'])
-def profile_vi(id):
-    pr = User.query.get(id)
-    if current_user.is_authenticated and id==current_user.id:
-        return redirect(url_for('profile'))
-    if request.method == "POST" and current_user.is_authenticated:
-        us_1 = current_user.name
-        us_2 = pr.name
-        check_1 = db.session.query(Chat).filter((Chat.us_2==us_1) and (Chat.us_1==us_2)).first()
-        check_2 = db.session.query(Chat).filter((Chat.us_2==us_2) and (Chat.us_1==us_1)).first()
-        check = str(str(check_2) + str(check_1))
-        print(check)
-        if check=='NoneNone':
-            print('None')
-            us_2 = pr.name
-            mess = ['Привет']
-            print(mess)
-            com_cr = Chat(us_1=current_user.name, us_2=us_2, mess=mess, pub_date=[datetime.datetime.utcnow()], name=[current_user.name])
-            print('te')
-            db.session.add(com_cr)
-            print('1')
-            db.session.commit()
-            return redirect(url_for('list'))
-        else:
-            if check_1 == None:
-                print('none')
-            else:
-                check = check_1.id
-
-            if check_2 == None:
-                print('none')
-            else:
-                check = check_2.id
-
-            print(check)
-            return redirect('/chat/' + str(check) + '/')
-    elif not current_user.is_authenticated:
-        return redirect('/login')
-    else:
-        list_item = db.session.query(Item).filter_by(creator_id=id).all()
-        return render_template('prof_vi.html', ma=pr, main=list_item, mat=len(list_item))
-
-@app.route('/list/mess/')
-@login_required
-def list():
-    list = Chat.query.order_by(Chat.us_1==current_user.name or Chat.us_2==current_user.name).all()
-    for l in list:
-        print(l)
-    return render_template('list_mess.html', list=list)
 
 @login_manager.request_loader
 def load_user_from_request(request):
@@ -564,64 +170,25 @@ def load_user(id):
     return User.query.get(id)
 
 @app.route('/create', methods=['POST', 'GET'])
-@login_required
+#@login_required
 def create():
-    if request.method == "POST" and current_user.is_authenticated:
+    if request.method == "POST":
+    #and current_user.is_authenticated
         title = request.form['title']
-        price = request.form['price']
-        adr_ul = request.form['ad_ul']
-        adr_k = request.form.get('ad_k')
-        adr_hou = request.form['adr_hou']
-        index = request.form['index']
         captcha_response = request.form['g-recaptcha-response']
-        print(captcha_response)
         if str(captcha_response)=='':
-            print('xxx')
             return redirect('/create')
         img = request.files.getlist('img[]')
         text = request.form['text']
         prew_img = request.files['prew_img']
-        print(str(index) + '1')
-        if str(index) + '1' != '1':
-            print('aaa')
-            geolocator = Nominatim(user_agent=str(randint(0, 300)))
-            location = geolocator.geocode(str(index))
-            print((location.latitude, location.longitude))
-            lat = location.latitude
-            log = location.longitude
-            ad = location.address
-
-        else:
-            print('a')
-            b=adr_ul
-            k=adr_k
-            c=adr_hou
-            geolocator = Nominatim(user_agent=str( adr_ul + adr_hou).encode('utf-8'))
-            location = geolocator.geocode(b +' '+c+' '+k)
-            print(location)
-            print((location.latitude, location.longitude))
-            lat = location.latitude
-            log = location.longitude
-            ad = location.address
-            if str(index) == '' and str(index) == None and str(adr_ul) == '' and str(adr_ul) == None:
-                flash('Введите индекс или адрес')
-        if ad:
-            flash('Проверьте адрес: {{ ad }}')
         fname = []
-        print(img)
         for im in img:
-#            imm = im.filename
-            imm = str(title) + str(price) + str(current_user.name) + str(randint(0, 10000))
+            imm = str(title) + str(current_user.name) + str(randint(0, 10000))
             im.save(os.path.join(app.config['UPLOAD_FOLDER'], imm))
             fname.append(imm)
-        print(fname)
-        pre_img = str(prew_img.filename) + str(title) + str(price) + str(current_user.name) + str(randint(0, 10000)) + str('prew')
-        prew_img.save(os.path.join(app.config['UPLOAD_FOLDER'],
-                                   pre_img))
-        item = Item(title=str(title), price=price, img=fname, text=text, prew_img=pre_img, ad=str(ad), lat=str(lat), log=str(log), creator_id=current_user.id)
-        print(fname)
+        print(str(title), fname, text, current_user.name)
+        item = Item(title=str(title), img=fname, text=text, creator_name=current_user.name)
         db.session.add(item)
-        print(item)
         db.session.commit()
         return redirect('/')
     else:
@@ -629,4 +196,4 @@ def create():
 
 app.secret_key = 'some_secret_key'
 if __name__ == "__main__":
-    app.run(debug=False, host='192.168.1.4')
+    app.run(debug=False, host='192.168.43.94')

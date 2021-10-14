@@ -14,35 +14,37 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 <body>
-        <nav class="navbar navbar-expand-lg border border-info rounded-0 navbar-light navbar-fixed-top bg-light" style="position:fixed; display: inline-block; width: 100%;">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top" style="position:fixed; display: inline-block; width: 100%;">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="https://placeholder.pics/svg/150x50/888888/EEE/Logo" alt="...">
+    </a>
+
+  <button class="navbar-toggler" style="float:right;" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="/" style="float: left">FIN</a>
-
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav ml-auto">
-                    <form class="li a form-inline my-2 my-lg-0 justify-content-center" action="{{url_for('result')}}" method="post">
-                        <input class="form-control mr-sm-2 justify-content-center" type="text" id="search" name="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-info my-3 my-sm-0" type="submit">Search</button>
-                    </form>
-
-                    {% if not current_user.is_authenticated %}
-                    <li class="li" style="float:right"><a class="a nav-link" href="/signup">sign_up</a></li>
-                    <li class="li" style="float:right"><a class="a nav-link" href="/login">login</a></li>
-                    {% endif %}
-                     {% if current_user.is_authenticated %}
-                    <li class="li" style="float:right"><a class="a nav-link" href="/list/mess">Сообщения</a></li>
-                    <li class="li" style="float:right"><a class="a nav-link" href="/list/service">Оповещения об услугах</a></li>
-                    <li class="li" style="float:right"><a class="a nav-link" href="/profile">Профиль</a></li>
-                    <li class="li" style="float:right"><a class="a nav-link" href="{{ url_for('logout') }}">logout</a></li>
-                    <li class="li" style="float:right"><a class="a nav-link" href="/create">Создать услугу</a></li>
-                    {% endif %}
-                    <li class="li" style="float:right"><a class="a nav-link" href="/">Главнвя</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+         <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 Dropdown
+             </a>
+         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <button class="dropdown-item" type="button">Action</button>
+              <button class="dropdown-item" type="button">Another action</button>
+              <button class="dropdown-item" type="button">Something else here</button>
+         </ul>
+         </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 
         {% block body %}{% endblock %}
